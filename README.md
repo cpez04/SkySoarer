@@ -9,5 +9,7 @@ Latest start date: 11/25 (Fri)
 
 After each change, execute the following in the terminal:
 1. git commit [file name]
-2. git push
+2. when the terminal shows "hint: Waiting for your editor to close the file...", type a commit message in the newly opened window.
+3. git push
+
 * have to execute git commit for EVERY file that you changed.
