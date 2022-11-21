@@ -3,7 +3,7 @@ Timeline
 
 11/25 (Fri): Latest start date
 
-11/27 (Sun): simple prototype (webpages and buttons), login and logout functions sessions; CSS
+11/27 (Sun): simple prototype (webpages and buttons), login and logout functions sessions; CSS; Email/text security confirmation post-registration.
 
 11/30 (Wed): SQL; basic flight tracker; user customization
 
