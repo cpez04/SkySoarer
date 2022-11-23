@@ -85,3 +85,6 @@ def logout():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
+
+    # Redirect user to register page
+    return render_template("register.html")
