@@ -3,8 +3,8 @@
 API KEY: c6f24eaf-a7e1-412b-8fdc-f0ca0194c440 
 
 Documentation for API (AirLabs): https://airlabs.co/docs/
-Note: We only get 1,000 queries for the free plan. After that we have to get another free account lol
 
+Note: We only get 1,000 queries for the free plan. 
 ------------------------------------------------------------------------------------------------------------------------
 Timeline:
 
