@@ -1,8 +1,11 @@
 # SkySoarer
-Timeline
 
-API KEY: c6f24eaf-a7e1-412b-8fdc-f0ca0194c440
+API KEY: c6f24eaf-a7e1-412b-8fdc-f0ca0194c440 
+
 Documentation for API (AirLabs): https://airlabs.co/docs/
+
+------------------------------------------------------------------------------------------------------------------------
+Timeline:
 
 11/27 (Sun): simple prototype (webpages and buttons), login and logout functions sessions; CSS; Email/text security confirmation post-registration.
 
