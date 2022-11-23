@@ -21,9 +21,45 @@
     </head>
 
     <body>
-        
-        <nav>
-        </nav>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">
+          <!--Title-->
+            <span class="navbar-brand mb-0 h1">
+              SkySoarer
+            </span>
+        </a>
+        <!--Collapseable feature -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!--Components of nav bar-->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <!--section 1-->
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(About us)</span></a>
+            </li>
+            <!--section 2-->
+            <li class="nav-item">
+              <a class="nav-link" href="./">TODO</a>
+            </li>
+            <!--section 3-->
+            <li class="nav-item">
+              <a class="nav-link" href="./">TODO</a>
+            </li>
+            <!--section 4-->
+            <li class="nav-item">
+              <a class="nav-link" href="./">TODO</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!--Background music - essential-->
+      <audio controls autoplay loop hidden>
+        <source src="backgroundmusic.mp3" type="audio/mpeg">
+      </audio>
 
         <main>
             {% block main %}{% endblock %}
