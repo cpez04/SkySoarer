@@ -35,6 +35,7 @@ def after_request(response):
 @login_required
 def index():
     """Main page"""
+    return render_template("main.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
