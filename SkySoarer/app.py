@@ -32,7 +32,6 @@ def after_request(response):
     return response
 
 @app.route("/")
-@login_required
 def index():
     """Main page"""
     return render_template("main.html")
