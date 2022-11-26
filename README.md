@@ -21,7 +21,9 @@ Steps to running flask project and getting live code changes visible on webpage:
     
     flask --app app.py --debug run
 
- After making code changes make sure to save the file in your IDE or text editor (ctrl-s). Reload webpage for code updates.
+  4. After making code changes. make sure to save the file in your IDE or text editor (ctrl-s).
+  
+  5. Reload website to view changes.
  
 ------------------------------------------------------------------------------------------------------------------------
 TO PUSH AND PULL CHANGES EASILY:
