@@ -11,18 +11,17 @@ from helpers import apology, login_required
 # Configure application
 app = Flask(__name__)
 
+# Make sure API key is set
+if not os.environ.get("API_KEY"):
+    raise RuntimeError("API_KEY not set")
+
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.config['TEMPLATES_AUTO_RELOAD'] = True #Hello
 Session(app)
 
 # Configure CS50 Library to use database
 db = SQL("sqlite:///skysoarer.db")
-
-# Make sure API key is set
-if not os.environ.get("API_KEY"):
-    raise RuntimeError("API_KEY not set")
 
 @app.after_request
 def after_request(response):
