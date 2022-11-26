@@ -35,6 +35,7 @@ def after_request(response):
 def index():
     return render_template("main.html")
 
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
