@@ -7,6 +7,19 @@ Documentation for API (AirLabs): https://airlabs.co/docs/
 Note: We only get 1,000 queries for the free plan. 
 
 ------------------------------------------------------------------------------------------------------------------------
+Steps to running flask project and getting live code changes visible on webpage:
+ (refer to: https://stackoverflow.com/questions/16344756/auto-reloading-python-flask-app-upon-code-changes) 
+  1. cd into project directory. (native os terminal prefered)
+  *you can get path via pwd command*
+  2. set environment variables FLASK_APP and FLASK_ENV as outlined in stackoverflow solution (aka):
+  $ export FLASK_APP=app.py
+  $ export FLASK_ENV=development
+  
+  3. When ready to test code, execute the following line in the project directory:
+    flask --app app.py --debug run
+
+ After making code changes make sure to save the file in your IDE or text editor (ctrl-s). Reload webpage for code updates.
+------------------------------------------------------------------------------------------------------------------------
 Timeline:
 
 11/27 (Sun): simple prototype (webpages and buttons), login and logout functions sessions; CSS; Email/text security confirmation post-registration.
