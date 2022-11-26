@@ -12,13 +12,20 @@ Steps to running flask project and getting live code changes visible on webpage:
   1. cd into project directory. (native os terminal prefered)
   *you can get path via pwd command*
   2. set environment variables FLASK_APP and FLASK_ENV as outlined in stackoverflow solution (aka):
+  
   $ export FLASK_APP=app.py
+  
   $ export FLASK_ENV=development
   
   3. When ready to test code, execute the following line in the project directory:
+    
     flask --app app.py --debug run
 
  After making code changes make sure to save the file in your IDE or text editor (ctrl-s). Reload webpage for code updates.
+ 
+------------------------------------------------------------------------------------------------------------------------
+TO PUSH AND PULL CHANGES EASILY:
+- DOWNLOAD AND USE GITHUB DESKTOP
 ------------------------------------------------------------------------------------------------------------------------
 Timeline:
 
