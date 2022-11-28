@@ -1,10 +1,12 @@
 import os
 import requests
 import urllib.parse
+import re
 
 from flask import redirect, render_template, request, session
 from functools import wraps
 
+regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
 def apology(message, code=400):
     """Render message as an apology to user."""
@@ -33,4 +35,3 @@ def login_required(f):
             return redirect("/register")
         return f(*args, **kwargs)
     return decorated_function
-
