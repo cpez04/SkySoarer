@@ -23,6 +23,8 @@ Session(app)
 # Configure CS50 Library to use database
 db = SQL("sqlite:///skysoarer.db")
 
+db.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL, hash TEXT NOT NULL, email TEXT NOT NULL)")
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -86,6 +88,7 @@ def logout():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-
-    # Redirect user to register page
-    return render_template("register.html")
+    if request.method =="GET":
+        return render_template("register.html")
+    else:
+        return apology("Hello", 403)
