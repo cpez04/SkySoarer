@@ -92,6 +92,7 @@ def logout():
 
     # Redirect user to login form
     # How are we Chris!
+    # Hellooo Ben 
     return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
