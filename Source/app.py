@@ -51,15 +51,15 @@ def login():
     if request.method == "POST":
 
         # Ensure username was submitted
-        if not request.form.get("username"):
-            return apology("must provide username", 403)
+        if not request.form.get("email"):
+            return apology("must provide email", 403)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute("SELECT * FROM userdata WHERE email = ?", request.form.get("email"))
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
@@ -69,7 +69,7 @@ def login():
         session["user_id"] = rows[0]["id"]
 
         # Redirect user to home page
-        return redirect("/")
+        return render_template("main.html")
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
@@ -84,7 +84,7 @@ def logout():
     session.clear()
 
     # Redirect user to login form
-    return redirect("/")
+    return redirect("/login")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
