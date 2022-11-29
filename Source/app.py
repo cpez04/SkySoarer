@@ -26,13 +26,6 @@ db = SQL("sqlite:///skysoarer.db")
 
 db.execute("CREATE TABLE IF NOT EXISTS userdata (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL, hash TEXT NOT NULL, email TEXT NOT NULL)")
 
-def check(email):
-    if(re.fullmatch(regex, email)):
-       return True
- 
-    else:
-        return False 
-
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -96,21 +89,21 @@ def logout():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    if request.method =="GET":
+    if request.method == "GET":
         return render_template("register.html")
     else:
-        if request.form.get("name") == "":
+        if not request.form.get("name"):
             return apology("must provide name", 400)
-        elif request.form.get("email") == "":
+        elif not request.form.get("email"):
             return apology("must provide email", 400)
-        elif request.form.get("password") == "":
+        elif not request.form.get("password"):
             return apology("must provide password", 400)
-        elif request.form.get("confirmpassword") == "":
+        elif not request.form.get("confirmpassword"):
             return apology("must provide confirmation", 400)
-        elif not (request.form.get("password") == request.form.get("confirmpassword")):
+        elif (request.form.get("password") != request.form.get("confirmpassword")):
             return apology("passwords must match", 400)
 
-        try:  # tries to insert username and hashed pass into users table knowing it will throw an error if username is not unique
+        try:  #tries to insert username and hashed pass into users table knowing it will throw an error if username is not unique
             db.execute("INSERT INTO userdata (name, hash, email) VALUES (?,?,?)", request.form.get("name"), generate_password_hash(
                 request.form.get("password"), method='pbkdf2:sha256', salt_length=8), request.form.get("email"))
             return render_template("login.html")
