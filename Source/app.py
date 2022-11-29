@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required
 
 
-# Configure application
+# Configure application hello
 app = Flask(__name__)
 
 # Make sure API key is set
