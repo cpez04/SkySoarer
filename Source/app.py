@@ -37,7 +37,8 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
-    return render_template("main.html")
+    name = db.execute("SELECT name FROM userdata WHERE id = ?", session["user_id"])[0]['name']
+    return render_template("main.html", name=name)
 
 
 @app.route("/login", methods=["GET", "POST"])
