@@ -61,7 +61,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    margin-top: -300px;
+    margin-top: -300px; /* don't put negative number: try modify padding */
   }
   
   .container h1:nth-child(1) {
