@@ -10,7 +10,21 @@ params = {
 method = 'nearby'
 api_base = 'http://airlabs.co/api/v9/'
 api_result = requests.get(api_base+method, params)
-api_response = api_result.json()["response"]["airports"][2]['name']
+api_response = api_result.json()["response"]["airports"] #prints informaiton for airports nearby
 
-print(api_response)
+keys = []
+values = []
+length = len(api_response)
+dicts = {}
+
+for row in api_response:
+  keys.append(row['name'])
+  values.append(row['distance'])
+
+for i in range (length):
+  dicts[keys[i]] = values[i]
+  
+#dicts now stores airport + distance from user
+
+# print(len(api_response)) # prints # of nearby airports in given radius 
 
