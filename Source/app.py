@@ -34,7 +34,7 @@ def after_request(response):
 @login_required
 def index():
     name = db.execute("SELECT name FROM userdata WHERE id = ?", session["user_id"])[0]['name']
-    return render_template("main.html", name=name)
+    return render_template("main.html", name=name.split()[0])
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -66,7 +66,7 @@ def login():
         session["user_id"] = rows[0]["id"]
 
         # Redirect user to home page
-        return render_template("main.html")
+        return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
@@ -97,6 +97,8 @@ def register():
             return apology("you already have an account", 400)
         elif not request.form.get("password"):
             return apology("must provide password", 400)
+        elif len(request.form.get("password")) < 6:
+            return apology("password must be > 6 characters")
         elif not request.form.get("confirmpassword"):
             return apology("must provide confirmation", 400)
         elif (request.form.get("password") != request.form.get("confirmpassword")):
@@ -104,4 +106,5 @@ def register():
         
         db.execute("INSERT INTO userdata (name, hash, email) VALUES (?,?,?)", request.form.get("name"), generate_password_hash(
                 request.form.get("password"), method='pbkdf2:sha256', salt_length=8), request.form.get("email"))
+        
         return render_template("login.html")
