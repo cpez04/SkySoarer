@@ -156,7 +156,7 @@ def nearby():
            
         print(keys)
         print(values)
-        return render_template("nearbyed.html", keys=keys, values=values)
+        return render_template("nearbyed.html", keys=keys)
  
 
 @app.route("/settings")
