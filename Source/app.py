@@ -12,10 +12,6 @@ from helpers import apology, login_required
 # Configure application hello
 app = Flask(__name__)
 
-# Make sure API key is set
-if not os.environ.get("API_KEY"):
-    raise RuntimeError("API_KEY not set")
-
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -97,17 +93,15 @@ def register():
             return apology("must provide name", 400)
         elif not request.form.get("email"):
             return apology("must provide email", 400)
+        elif len(db.execute("SELECT email FROM userdata WHERE email = ? LIMIT 1", request.form.get("email"))) == 1:
+            return apology("you already have an account", 400)
         elif not request.form.get("password"):
             return apology("must provide password", 400)
         elif not request.form.get("confirmpassword"):
             return apology("must provide confirmation", 400)
         elif (request.form.get("password") != request.form.get("confirmpassword")):
             return apology("passwords must match", 400)
-
-        try:  #tries to insert username and hashed pass into users table knowing it will throw an error if username is not unique
-            db.execute("INSERT INTO userdata (name, hash, email) VALUES (?,?,?)", request.form.get("name"), generate_password_hash(
+        
+        db.execute("INSERT INTO userdata (name, hash, email) VALUES (?,?,?)", request.form.get("name"), generate_password_hash(
                 request.form.get("password"), method='pbkdf2:sha256', salt_length=8), request.form.get("email"))
-            return render_template("login.html")
-        except:
-            return apology("username already exists", 400)
-
+        return render_template("login.html")

@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
-
-fhufhuf 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap'); 
 
 /* Size for brand */
 nav .navbar-brand
@@ -62,6 +60,14 @@ body {
     margin-right: auto;
     text-align: center;
     margin-top: -300px; /* don't put negative number: try modify padding */
+  }
+
+  .containerregister{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 0 px; /* don't put negative number: try modify padding */
   }
   
   .container h1:nth-child(1) {
@@ -154,7 +160,6 @@ body {
     color: white;
     font-family: 'Roboto Slab', serif;
     font-weight: 300;
-    background-image: url("https://images.pexels.com/photos/314726/pexels-photo-314726.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); /* Photo by Irina Iriser from Pexels */
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
