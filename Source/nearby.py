@@ -24,9 +24,6 @@ for row in api_response:
 for i in range (length):
   dicts[keys[i]] = values[i]
   
-print(dicts)
-  
-#dicts now stores airport + distance from user
-
+print(keys[0])
 # print(len(api_response)) # prints # of nearby airports in given radius 
 

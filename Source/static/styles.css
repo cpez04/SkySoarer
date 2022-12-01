@@ -7,27 +7,9 @@ nav .navbar-brand
     padding-left: 5px;
 }
 
-/* Colors for brand */
-nav .navbar-brand .blue
-{
-    color: #537fbe;
-}
-nav .navbar-brand .red
-{
-    color: #ea433b;
-}
-nav .navbar-brand .yellow
-{
-    color: #f5b82e;
-}
-nav .navbar-brand .green
-{
-    color: #2e944b;
-}
-
 body {
     margin-top: 50px;
-    background: #FBD4C5;
+    background: hsl(0, 0%, 100%);
 }
 
 .my-form
@@ -61,23 +43,66 @@ body {
 
 .welcometext /* changes color of Welcome, (name) text! */
 {
-  color:rgb(225, 25, 25)
+  color:hsl(240, 58%, 24%);
+  padding: 15px;
 }
 
-  
-body {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: rgb(142, 236, 167);
-    color: rgb(255, 0, 0);
-    font-family: 'Roboto Slab', serif;
-    font-weight: 300;
-  }
-  
-footer { 
-  margin-top: auto;
+.searchbtn 
+{
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: none;
+    color: hsl(240, 58%, 24%);
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
 }
+  
+.searchbtn span 
+{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+  
+.searchbtn span:after 
+{
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+  
+.searchbtn:hover span 
+{
+    padding-right: 25px;
+}
+  
+.button:hover span:after 
+{
+    opacity: 1;
+    right: 0;
+    background-color: hsl(240, 58%, 24%);
+    color: white;
+}
+
+.searchbox
+{
+    display: inline-block;
+    background-color: #ffffff;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    margin: 2px;
+}
+
+/* box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); */

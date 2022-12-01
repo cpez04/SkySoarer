@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Nearby Airports
+{% endblock %}
+
+{% block main %}
+<table class ="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-start">Aiport Name</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% for row in keys, values %}
+            <tr>
+                <td>{{keys[row]}} is {{values[row]}} km away!</td>
+            </tr>
+            {% endfor %}
+    </tbody>
+   </table>
+
+
+{% endblock %}

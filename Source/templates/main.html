@@ -6,8 +6,16 @@
 {% endblock %}
 
 {% block main %}
-    <div style= "margin-top: 30px; font-size: 40px"
-    <h1 class="welcometext">Welcome, {{name}}!</h1>
-</div>
+    <div style= "margin-top: 0px; font-size: 40px">
+        <h1 class="welcometext">Welcome, {{name}}!</h1>
+
+        <form action="/search" method="post">
+            <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3cg"><b>Search flights!</b></label>
+            <input type="text" name="flights" id="flights" class="form-control form-control-lg" placeholder="Search" />
+            <button class="searchbtn" type="submit">Search</button>
+        </form>
+    </div>
+</body>
 
 {% endblock %}

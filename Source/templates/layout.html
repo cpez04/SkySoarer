@@ -4,7 +4,7 @@
 
     <head>
 
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="initial-scale=1, width=device-width">
 
         <!-- http://getbootstrap.com/docs/5.1/ -->
@@ -20,10 +20,12 @@
     <body>
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
           <!--Title-->
             <span class="navbar-brand mb-0 h1">
-              SkySoarer &#9992
+              SkySoarer &#x1F6E9
+
+
             </span>
         </a>
         <!--Collapseable feature -->
@@ -40,15 +42,15 @@
             </li>
             <!--section 2-->
             <li class="nav-item">
-              <a class="nav-link" href="./">TODO</a>
+              <a class="nav-link" href="/nearby">Nearby Airports</a>
             </li>
             <!--section 3-->
             <li class="nav-item">
-              <a class="nav-link" href="./">TODO</a>
+              <a class="nav-link" href="/search">Search flights</a>
             </li>
             <!--section 4-->
             <li class="nav-item">
-              <a class="nav-link" href="./">TODO</a>
+              <a class="nav-link" href="/settings">Settings</a>
             </li>
 
             <li class="nav-item">
@@ -68,8 +70,9 @@
       <main class="container-fluid py-5 text-center">
             {% block main %}{% endblock %}
       </main>
-
-        <footer>Data provided by <a href="https://airlabs.co/" target="_blank" >AirLabs</footer>
+      {% if session["user_id"] %}
+        <footer><center>Data provided by <a href="https://airlabs.co/" target="_blank" >AirLabs</center></footer>
+      {% endif %}
 
     </body>
 

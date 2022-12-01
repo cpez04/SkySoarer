@@ -1,4 +1,7 @@
 import os
+import geocoder
+import requests
+import json
 
 from flask import Flask, flash, redirect, render_template, request, session
 from cs50 import SQL
@@ -108,3 +111,55 @@ def register():
                 request.form.get("password"), method='pbkdf2:sha256', salt_length=8), request.form.get("email"))
         
         return render_template("login.html")
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    """Search flights"""
+    # Redirect user to searched
+    if request.method == "POST":
+        return render_template("searched.html")
+    return apology("Flight does not exist", 400)
+
+@app.route("/nearby", methods=["GET", "POST"])
+def nearby():
+    """To get nearby flights"""
+    if request.method == "GET":
+        return render_template("nearby.html")
+    else:
+        latlng=geocoder.ip('me').latlng
+        latitude = latlng[0]
+        longitude = latlng[1]
+        radius = request.form.get("radius")
+        
+        params = {
+        'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
+        'lat': latitude,
+        'lng': longitude,
+        'distance': radius
+        }
+        method = 'nearby'
+        api_base = 'http://airlabs.co/api/v9/'
+        api_result = requests.get(api_base+method, params)
+        api_response = api_result.json()["response"]["airports"] #prints informaiton for airports nearby
+        
+        keys = []
+        values = []
+        dicts = {}
+        length = len(api_response)
+
+        for row in api_response:
+            keys.append(row['name'])
+            values.append(row['distance'])
+      
+        for i in range(length):
+            dicts[keys[i]] = values[i]
+           
+        print(keys)
+        print(values)
+        return render_template("nearbyed.html", keys=keys, values=values)
+ 
+
+@app.route("/settings")
+def settings():
+    """Settings"""
+    return render_template("settings.html")
