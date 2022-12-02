@@ -69,7 +69,7 @@ def index():
 
         # pair key-value
         for i in range(len(key)):
-            dict[key[i]] = value[i]
+            dict[key[i]] = value[i].title()
 
         return render_template("searched.html", flight_iata=flight_iata, dict=dict)
     return render_template("main.html", name=name.split()[0])

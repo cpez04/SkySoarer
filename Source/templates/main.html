@@ -8,16 +8,18 @@
 {% block main %}
 <section class="vh-100 bg-image"
   style="background-image: url('https://c4.wallpaperflare.com/wallpaper/951/792/846/aviation-aircraft-flight-sunrise-clouds-sky-white-airplane-wallpaper-preview.jpg');">
-<div style= "margin-top: 0px; font-size: 40px">
-        <h1 class="welcometext">Welcome, {{name}}!</h1>
+    <h1 class="welcometext">Welcome, {{name}}!</h1>
+    <p>Search Flights!</p>
 
-        <form action="/" method="post">
-            <div class="form-outline mb-4">
-            <label class="form-label" for="form3Example3cg"><b>Search flights!</b></label>
-            <input type="text" name="flight_iata" id="flight_iata" class="form-control form-control-lg searchbox" placeholder="Flight iata code" />
+    <form action="/" method="post">
+        <div class="form-outline mb-4">
+        </div>
+        <div>
+            <input type="text" name="flight_iata" id="flight_iata" class="form-control form-control-lg searchbox" placeholder="Flight Iata Code" />
+        </div>
+        <div>
             <button class="searchbtn" type="submit">Search</button>
-        </form>
-    </div>
-</body>
+        </div>
+    </form>
 
 {% endblock %}
