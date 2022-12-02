@@ -183,3 +183,14 @@ body {
         opacity: 1;
      }
 }
+
+
+/*Light/dark mode: https://stackoverflow.com/questions/63577939/save-dark-mode-light-mode-to-localstoage*/
+
+body.dark {
+    background-color: #121212;
+}
+body.light {
+    background-color: white;
+}
+

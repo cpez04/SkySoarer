@@ -78,7 +78,22 @@
       {% if session["user_id"] %}
         <footer><center>&#169SkySoarer 2022 | Data provided by <a href="https://airlabs.co/" target="_blank" >AirLabs</center></footer>
       {% endif %}
-
     </body>
-
+    <script>
+    <!--inspired from https://stackoverflow.com/questions/63577939/save-dark-mode-light-mode-to-localstoage-->
+    window.onload=function() {
+      if(localStorage.darkMode=="false") {
+        document.body.classList.toggle('dark');
+        document.getElementById("alert1").checked=true;
+        }
+      else {
+        document.body.classList.toggle('light');
+      }
+    };
+    document.getElementById("alert1").addEventListener('change', () => {
+      document.body.classList.toggle('dark');
+      document.body.classList.toggle('light');
+      localStorage.darkMode=(localStorage.darkMode=="true")?"false":"true";
+    });
+    </script>
 </html>
