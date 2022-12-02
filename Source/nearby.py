@@ -10,7 +10,7 @@ params = {
 method = 'nearby'
 api_base = 'http://airlabs.co/api/v9/'
 api_result = requests.get(api_base+method, params)
-api_response = api_result.json()["response"]["airports"] #prints informaiton for airports nearby
+api_response = api_result.json()["response"]["airports"] #prints information for airports nearby
 
 keys = []
 values = []

@@ -46,7 +46,12 @@
             </li>
             <!--section 3-->
             <li class="nav-item">
-              <a class="nav-link" href="/search">Search flights</a>
+              <a class="nav-link" href="/">Search flights</a>
+            </li>
+            <!--section 4-->
+            <!--section 3-->
+            <li class="nav-item">
+              <a class="nav-link" href="/track">Track Flight</a>
             </li>
             <!--section 4-->
             <li class="nav-item">
@@ -54,7 +59,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/logout">LOGOUT</a>
+              <a class="nav-link" href="/logout"><b>LOGOUT</b></a>
             </li>
 
             {% else %}
@@ -71,7 +76,7 @@
             {% block main %}{% endblock %}
       </main>
       {% if session["user_id"] %}
-        <footer><center>Data provided by <a href="https://airlabs.co/" target="_blank" >AirLabs</center></footer>
+        <footer><center>&#169SkySoarer 2022 | Data provided by <a href="https://airlabs.co/" target="_blank" >AirLabs</center></footer>
       {% endif %}
 
     </body>

@@ -45,3 +45,6 @@ After each change, execute the following in the terminal:
 3. git push
 
 * have to execute git commit for EVERY file that you changed. (until we find an easier way to implement these changes)
+
+
+bootstrap settings page format: https://www.bootdey.com/snippets/view/profile-notification-settings

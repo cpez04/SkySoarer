@@ -33,10 +33,33 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-@app.route("/")
+
+@app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
     name = db.execute("SELECT name FROM userdata WHERE id = ?", session["user_id"])[0]['name']
+
+    if request.method == "POST":
+        flight_icao = 'AAL6'
+        flight_iata = 'AA6'
+
+        # when user determines a specific flight, returns an info report (maybe here allows save as pdf)
+        params = {
+        'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
+        'flight_icao': flight_icao,
+        'flight_iata': flight_iata
+        }
+
+        method = 'flight'
+        api_base = 'http://airlabs.co/api/v9/'
+        api_result = requests.get(api_base+method, params)
+        api_response = api_result.json()['response']
+
+        key = ['aircraft_icao', 'airline_iata']
+        value = []
+        for items in key:
+            value.append(api_response[items])
+        return render_template("searched.html", flight_icao=flight_icao, flight_iata=flight_iata, key=key, value=value)
     return render_template("main.html", name=name.split()[0])
 
 
@@ -112,14 +135,6 @@ def register():
         
         return render_template("login.html")
 
-@app.route("/search", methods=["GET", "POST"])
-def search():
-    """Search flights"""
-    # Redirect user to searched
-    if request.method == "POST":
-        return render_template("searched.html")
-    return apology("Flight does not exist", 400)
-
 @app.route("/nearby", methods=["GET", "POST"])
 def nearby():
     """To get nearby flights"""
@@ -129,7 +144,10 @@ def nearby():
         latlng=geocoder.ip('me').latlng
         latitude = latlng[0]
         longitude = latlng[1]
-        radius = request.form.get("radius")
+        radius = float(request.form.get("radius"))
+        
+        if radius <= 0:
+            return apology("must type positive number", 400)
         
         params = {
         'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
@@ -145,7 +163,11 @@ def nearby():
         keys = []
         values = []
         dicts = {}
+        arethereairports = True
         length = len(api_response)
+        
+        if length == 0:
+            arethereairports = False
 
         for row in api_response:
             keys.append(row['name'])
@@ -154,12 +176,14 @@ def nearby():
         for i in range(length):
             dicts[keys[i]] = values[i]
            
-        print(keys)
-        print(values)
-        return render_template("nearbyed.html", keys=keys)
+        return render_template("nearbyed.html", dicts=dicts, arethereairports=arethereairports)
  
 
 @app.route("/settings")
 def settings():
     """Settings"""
     return render_template("settings.html")
+
+@app.route("/track")
+def track():
+    return render_template("track.html")

@@ -5,20 +5,24 @@
 {% endblock %}
 
 {% block main %}
+{% if arethereairports %}
 <table class ="table table-striped">
     <thead>
         <tr>
-            <th class="text-start">Aiport Name</th>
+            <th class="text-start">Airport Name</th>
+            <th class="text-start">Distance</th>
         </tr>
     </thead>
     <tbody>
-            {% for row in keys, values %}
+            {% for key,value in dicts.items() %}
             <tr>
-                <td>{{keys[row]}} is {{values[row]}} km away!</td>
+                <td>{{key}}</td>
+                <td>{{value}} km</td>
             </tr>
             {% endfor %}
     </tbody>
    </table>
-
-
+{% else %}
+<p>There are no nearby airports :( </p>
+{%endif%}
 {% endblock %}
