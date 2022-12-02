@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+
+{% endblock %}
+
+{% block main %}
+    <div>
+        <h1 class="welcometext">Welcome, {{name}}!</h1>
+        <p>Search Flights!</p>
+
+        <form action="/" method="post">
+            <div class="search-box">
+                <button class="btn-search"><i class="fas fa-search"></i></button>
+                <input type="text" class="input-search" name="flight_iata" id="flight_iata" placeholder="Type to Search...">
+            </div>
+        </form>
+    </div>
+{% endblock %}
