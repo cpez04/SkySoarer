@@ -60,7 +60,6 @@ body {
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
-
 .searchbtn 
 {
     display: inline-block;
@@ -193,4 +192,3 @@ body.dark {
 body.light {
     background-color: white;
 }
-
