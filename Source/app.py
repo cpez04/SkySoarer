@@ -74,7 +74,7 @@ def index():
             dict[key[i]] = value[i].title()
 
         return render_template("searched.html", flight_iata=flight_iata, dict=dict)
-    return render_template("main.html", name=name.split()[0])
+    return render_template("main_test.html", name=name.split()[0])
 
 
 @app.route("/login", methods=["GET", "POST"])
