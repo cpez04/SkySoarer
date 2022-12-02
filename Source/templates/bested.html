@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Best Flights
+{% endblock %}
+
+{% block main %}
+<table class ="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-start">Airline Name</th>
+            <th class="text-start">Flight Number</th>
+            <th class="text-start">Price</th>
+            <th class="text-start">Number of Stops</th>
+            <th class="text-start">Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% for key,value in dict.items() %}
+            <tr>
+                <td>{{key}}</td>
+                <td>{{value[2]}}</td>
+                <td>{{(value[0])}}</td>
+                <td>{{value[1]}} stops</td>
+                <td>{{value[3]}} minutes</td>
+            </tr>
+            {% endfor %}
+    </tbody>
+   </table>
+{% endblock %}

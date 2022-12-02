@@ -1,14 +1,20 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Graph-main
+    Best Flights
 {% endblock %}
 
 {% block main %}
 <p><center>Let's find the <u>best</u> flights for you. Please type your desired flight information below!</center></p>
 <form action="/best" method="post">
     <div class="mb-3">
-        <input class="form-control mx-auto w-auto" id="radius" name="radius" placeholder="km" type="number" min="1" max="100">
+       
+        <p><b>Origin Airport:</b></p>
+        <input class="form-control mx-auto w-auto" id="origin" name="origin" placeholder="IATA Code" type="text">
+        <p><b>Destination Airport:</b></p>
+        <input class="form-control mx-auto w-auto" id="destination" name="destination" placeholder="IATA Code" type="text">
+        <p><b>Departure Date:</b></p>
+        <input class="form-control mx-auto w-auto" id="departureDate" name="departureDate" type="date">
     </div>
     <button class="btn btn-primary" type="submit">Search</button>
 </form>
