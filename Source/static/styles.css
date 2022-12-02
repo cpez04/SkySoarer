@@ -43,10 +43,10 @@ body {
 
 .welcometext /* changes color of Welcome, (name) text! */
 {
-  color:hsl(0, 0%, 0%);
-  padding: 15px;
-  font-size: 40px
-
+    color:hsl(0, 0%, 0%);
+    padding: 15px;
+    font-size: 40px;
+    font-family: "optima";
 }
 
 .searchbtn 
@@ -137,7 +137,7 @@ body {
     position: absolute;
     right: 0px;
     color:hsl(240, 58%, 24%);
-    background-color:transparent;
+    background-color: transparent;
     pointer-events: painted;  
 }
 .btn-search:focus ~ .input-search{
@@ -156,10 +156,9 @@ body {
 }
 
 .container {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    position: fixed;
-    align-items: center;
-    justify-content: center;
-  }
+    display: flex; /* establish flex container */
+    flex-direction: column; /* make main-axis vertical */
+    justify-content: center; /* align items vertically, in this case */
+    align-items: center; /* align items horizontally, in this case */
+    height: 300px; 
+}

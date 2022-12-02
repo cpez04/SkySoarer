@@ -72,7 +72,7 @@ def index():
             dict[key[i]] = value[i].title()
 
         return render_template("searched.html", flight_iata=flight_iata, dict=dict)
-    return render_template("main_test.html", name=name.split()[0])
+    return render_template("main.html", name=name.split()[0])
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -199,3 +199,12 @@ def settings():
 @app.route("/track")
 def track():
     return render_template("track.html")
+
+@app.route("/best", methods=["GET", "POST"])
+def best():
+    """Search for best flights"""
+    if request.method == "POST":
+
+       return render_template("bested.html")
+    # Redirect user to login form
+    return render_template("best.html")
