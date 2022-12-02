@@ -40,26 +40,38 @@ def index():
     name = db.execute("SELECT name FROM userdata WHERE id = ?", session["user_id"])[0]['name']
 
     if request.method == "POST":
-        flight_icao = 'AAL6'
-        flight_iata = 'AA6'
-
+        flight_iata = request.form.get("flight_iata")
+        
         # when user determines a specific flight, returns an info report (maybe here allows save as pdf)
         params = {
         'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
-        'flight_icao': flight_icao,
-        'flight_iata': flight_iata
+        'flight_iata': flight_iata,
         }
 
-        method = 'flight'
-        api_base = 'http://airlabs.co/api/v9/'
-        api_result = requests.get(api_base+method, params)
-        api_response = api_result.json()['response']
+        try:
+            method = 'flight'
+            api_base = 'http://airlabs.co/api/v9/'
+            api_result = requests.get(api_base+method, params)
+            api_response = api_result.json()['response']
+        except:
+            return apology("No match", 400)
 
-        key = ['aircraft_icao', 'airline_iata']
+        # keys store the info we want to show to users
+        key = ['dep_name', 'arr_name', 'status', 'dep_time', 'dep_gate'] 
         value = []
+        dict = {}
+
+        # retrieve values for each key
         for items in key:
             value.append(api_response[items])
-        return render_template("searched.html", flight_icao=flight_icao, flight_iata=flight_iata, key=key, value=value)
+            
+        key = ['Departure Airport', 'Arrival Airport', 'Flight Status', 'Departure Time', 'Departure Gate']
+
+        # pair key-value
+        for i in range(len(key)):
+            dict[key[i]] = value[i]
+
+        return render_template("searched.html", flight_iata=flight_iata, dict=dict)
     return render_template("main.html", name=name.split()[0])
 
 

@@ -5,5 +5,23 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Your flight information</h1>
+    <h1><u>Your Flight Information</u></h1>
+    <div>
+        Flight IATA code: <b>{{flight_iata}}</b>
+    </div>
+    <table class ="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Type</th>
+            </tr>
+        </thead>
+        <tbody>
+                {% for key,value in dict.items() %}
+                <tr>
+                    <td>{{key}}</td>
+                    <td>{{value}}</td>
+                </tr>
+                {% endfor %}
+        </tbody>
+       </table>
 {% endblock %}
