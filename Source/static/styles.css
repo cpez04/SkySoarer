@@ -172,6 +172,7 @@ body {
     justify-content: center; /* align items vertically, in this case */
     align-items: center; /* align items horizontally, in this case */
     height: 300px; 
+    padding-top: 100px;
 }
   
 @keyframes fadeInAnimation {
@@ -183,6 +184,16 @@ body {
      }
 }
 
+.reveal{
+    position: relative;
+    transform: translateY(150px);
+    opacity: 0;
+    transition: 2s all ease;
+  }
+  .reveal.active{
+    transform: translateY(0);
+    opacity: 1;
+  }
 
 /*Light/dark mode: https://stackoverflow.com/questions/63577939/save-dark-mode-light-mode-to-localstoage*/
 
