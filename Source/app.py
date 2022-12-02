@@ -2,12 +2,14 @@ import os
 import geocoder
 import requests
 import json
+import geopy
 
 from flask import Flask, flash, redirect, render_template, request, session
 from cs50 import SQL
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
+from geopy.geocoders import Nominatim
 
 from helpers import apology, login_required
 
@@ -150,12 +152,20 @@ def register():
 @app.route("/nearby", methods=["GET", "POST"])
 def nearby():
     """To get nearby flights"""
+    latlng=geocoder.ip('me').latlng
+    latitude = latlng[0]
+    longitude = latlng[1]
+        
     if request.method == "GET":
-        return render_template("nearby.html")
+        geolocator = Nominatim(user_agent="geoapiExercises")
+        location = geolocator.reverse(str(latitude)+","+str(longitude))
+        address = location.raw['address']
+        city = address.get('city', '')
+        state = address.get('state', '')
+        country = address.get('country', '')
+        zipcode = address.get('postcode')
+        return render_template("nearby.html", city=city, state=state, country=country, zipcode=zipcode)
     else:
-        latlng=geocoder.ip('me').latlng
-        latitude = latlng[0]
-        longitude = latlng[1]
         radius = float(request.form.get("radius"))
         
         if radius <= 0:

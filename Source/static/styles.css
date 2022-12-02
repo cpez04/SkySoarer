@@ -19,6 +19,7 @@ body {
     background: hsl(0, 0%, 100%);
 }
 
+
 .my-form
 {
     padding-top: 1.5rem;
@@ -55,6 +56,9 @@ body {
     padding-bottom: 5px;
     font-size: 50px;
     font-family: "optima";
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
 .searchbtn 
@@ -169,4 +173,13 @@ body {
     justify-content: center; /* align items vertically, in this case */
     align-items: center; /* align items horizontally, in this case */
     height: 300px; 
+}
+  
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
 }

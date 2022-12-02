@@ -5,7 +5,15 @@
 {% endblock %}
 
 {% block main %}
-<p><center>Let's find what airports are nearby! Type below your search radius (in km)!</center></p>
+<p><center>Let's find what airports are nearby!</center></p>
+<p><center>Presently, here is information about where you are.</center></p>
+<ul>
+    <li>City: {{city}}</li>
+    <li>State: {{state}}</li>
+    <li>Country: {{country}}</li>
+    <li>Zip Code: {{zipcode}}</li>
+  </ul>
+<p><center>Type below your search radius (in km)!</center></p>
 <form action="/nearby" method="post">
     <div class="mb-3">
         <input class="form-control mx-auto w-auto" id="radius" name="radius" placeholder="km" type="number" min="1" max="100">
