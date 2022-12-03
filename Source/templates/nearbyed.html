@@ -6,6 +6,8 @@
 
 {% block main %}
 {% if arethereairports %}
+<br>
+<body>
 <table class ="table table-striped">
     <thead>
         <tr>
@@ -22,6 +24,7 @@
             {% endfor %}
     </tbody>
    </table>
+</body>
 {% else %}
 <p>There are no nearby airports :( Perhaps try expanding your search radius? </p>
 {%endif%}
