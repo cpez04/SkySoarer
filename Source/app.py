@@ -59,21 +59,29 @@ def index():
             return apology("No match", 400)
 
         # keys store the info we want to show to users
-        key = ['dep_name', 'arr_name', 'status'] 
+        key = ['dep_name', 'arr_name', 'status', 'dep_time', 'dep_gate', 'arr_gate', 'model'] 
         value = []
         dict = {}
 
         # retrieve values for each key
         for items in key:
-            value.append(api_response[items])
+            try:
+                value.append(api_response[items])
+            except:
+                value.append("Not Available")
             
-        key = ['Departure Airport', 'Arrival Airport', 'Flight Status']
+        key = ['Departure Airport', 'Arrival Airport', 'Flight Status', 'Departure Time', 'Departure Gate', 'Arrival Gate', 'Airplane Model']
 
         # pair key-value
         for i in range(len(key)):
-            dict[key[i]] = value[i].title()
+            dict[key[i]] = value[i]
+            if dict[key[i]] is None:
+                dict[key[i]] = 'Not Available'
+            else:
+                dict[key[i]] = dict[key[i]].title()
 
         return render_template("searched.html", flight_iata=flight_iata, dict=dict)
+    
     return render_template("main_test.html", name=name.split()[0])
 
 

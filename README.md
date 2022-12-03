@@ -1,6 +1,7 @@
 # SkySoarer
 
-API KEY: c6f24eaf-a7e1-412b-8fdc-f0ca0194c440 
+AIRLABS API KEY: c6f24eaf-a7e1-412b-8fdc-f0ca0194c440 
+GOOGLE MAPS API KEY: AIzaSyAg3dpTGiCwOvr5QrS0CIuyrET6-lB4fVo
 
 Documentation for API (AirLabs): https://airlabs.co/docs/
 

@@ -14,12 +14,6 @@ nav .navbar-brand
   animation-duration: 1s;
 }
 
-body {
-    margin-top: 50px;
-    background: hsl(0, 0%, 100%);
-}
-
-
 .my-form
 {
     padding-top: 1.5rem;
@@ -203,3 +197,107 @@ body.dark {
 body.light {
     background-color: white;
 }
+
+body {
+    padding: 0;
+    min-height: 500vh;
+    margin-top: 50px;
+    background: hsl(0, 0%, 100%);
+    animation: body 1s linear;
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -1s);
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+  }
+  @keyframes body {
+    to {
+      background-color: rgb(19, 48, 97);
+    }
+  }
+
+.subtitle
+{
+    font-size: 15px;
+}
+
+.subtitle2
+{
+    font-size: 15px;
+    padding-top: 50px;
+    border-bottom: 1px dashed rgb(19, 48, 97);
+}
+
+.arrow 
+{
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-origin: 50%;
+    transform: translate3d(-50%, -50%);
+}
+
+.arrow-first
+{
+    animation: arrow-movement 2s ease-in-out infinite;
+}
+
+.arrow-second
+{
+    animation: arrow-movement 2s 1s ease-in-out infinite;
+}
+
+.arrow::before, .arrow::after
+{
+    background: rgb(0, 0, 0);
+    content: '';
+    display: block;
+    height: 3px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 30px;
+}
+
+.arrow::before
+{
+    transform: rotate(45deg) translateX(-23%);
+    transform-origin: top left;
+}
+
+.arrow::after
+{
+    transform: rotate(-45deg) translateX(23%);
+    transform-origin: top right;
+}
+
+@keyframes arrow-movement
+{
+    0%{
+        opacity: 0;
+        top: 45%
+    }
+    70%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+ul {
+    text-align: center;
+    list-style-position: inside;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*---------------------------------------------------*/

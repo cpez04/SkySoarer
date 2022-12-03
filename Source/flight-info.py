@@ -17,12 +17,15 @@ try:
 except:
   print("unsuccesff")
   
-key = ['dep_name', 'arr_name', 'status', 'dep_time', 'dep_gate'] 
+key = ['dep_name', 'arr_name', 'status', 'dep_time', 'dep_gate', 'arr_gate'] 
 value = []
 dict = {}
 
 for items in key:
-  value.append(api_response[items])
+  try:
+    value.append(api_response[items])
+  except:
+    value.append("Not Available")
 
 for i in range(len(key)):
   dict[key[i]] = value[i]
