@@ -5,5 +5,12 @@
 {% endblock %}
 
 {% block main %}
-<p>Hola</p>
+<p class="subtitle">Let's get started. Type in the flight IATA code</p>
+
+        <form action="/track" method="post">
+            <div class="search-box">
+                <button class="btn-search fas fa-search">🔍</button>
+                <input type="text" class="input-search" name="flight_iata" id="flight_iata" placeholder="IATA code">
+            </div>
+        </form>
 {% endblock %}

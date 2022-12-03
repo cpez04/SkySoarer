@@ -214,9 +214,29 @@ def settings():
     """Settings"""
     return render_template("settings.html")
 
-@app.route("/track")
+@app.route("/track", methods=["GET","POST"])
 def track():
-    return render_template("track.html")
+    if request.method == "GET":
+        return render_template("track.html")
+    else:
+        flight_iata = request.form.get("flight_iata")
+        params = {
+        'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
+        'flight_iata': flight_iata,
+        }
+
+        try:
+            method = 'flight'
+            api_base = 'http://airlabs.co/api/v9/'
+            api_result = requests.get(api_base+method, params)
+            api_response = api_result.json()['response']
+            latitude = api_response['lat']
+            longitude = api_response['lng']
+        except:
+            return apology("No match", 400)
+
+        return render_template("tracked.html", flight_iata=flight_iata, latitude=latitude, longitude=longitude)
+        
 
 @app.route("/best", methods=["GET", "POST"])
 def best():
