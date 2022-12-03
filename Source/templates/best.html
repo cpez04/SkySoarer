@@ -5,15 +5,17 @@
 {% endblock %}
 
 {% block main %}
+<br>
 <p><center>Let's find the <u>best</u> flights for you. Please type your desired flight information below!</center></p>
 <form action="/best" method="post">
     <div class="mb-3">
-       
-        <p><b>Origin Airport:</b></p>
+        <div><b>Origin Airport:</b></div>
         <input class="form-control mx-auto w-auto" id="origin" name="origin" placeholder="IATA Code" type="text">
-        <p><b>Destination Airport:</b></p>
+        <br>
+        <div><b>Destination Airport:</b></div>
         <input class="form-control mx-auto w-auto" id="destination" name="destination" placeholder="IATA Code" type="text">
-        <p><b>Departure Date:</b></p>
+        <br>
+        <div><b>Departure Date:</b></div>
         <input class="form-control mx-auto w-auto" id="departureDate" name="departureDate" type="date">
     </div>
     <button class="btn btn-primary" type="submit">Search</button>

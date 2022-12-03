@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
+    <!--Background music!!! - need to add javascript component so that it works with settings-->
+    <!--Music from https://www.youtube.com/watch?v=JcM7VFx-Q2E-->
+    <!--Converted to mp3 on https://ytmp3.nu/-->
+    <audio controls autoplay loop hidden>
+      <source src="background.mp3" type="audio/mpeg">
+    </audio>
     <head>
 
         <meta charset="UTF-8">
@@ -41,28 +46,28 @@
             <!--section 1-->
             {% if session["user_id"] %}
             <li class="nav-item active raise">
-              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link" href="/">&#127968Home</a>
             </li>
             <!--section 2-->
             <li class="nav-item raise">
-              <a class="nav-link" href="/nearby">Nearby Airports</a>
+              <a class="nav-link" href="/nearby">&#128269Nearby Airports</a>
             </li>
             <!--section 3-->
 
             <li class="nav-item raise">
-              <a class="nav-link" href="/best">Best Flights</a>
+              <a class="nav-link" href="/best">&#128184Best Flights</a>
             </li>
 
             <li class="nav-item raise">
-              <a class="nav-link" href="/track">Flight Tracker</a>
+              <a class="nav-link" href="/track">&#127919Flight Tracker</a>
             </li>
             <!--section 4-->
             <li class="nav-item raise">
-              <a class="nav-link" href="/settings">Settings</a>
+              <a class="nav-link" href="/settings">&#9881Settings</a>
             </li>
             
             <li class="nav-item raise">
-              <a class="nav-link" href="/logout"><b>LOGOUT</b></a>
+              <a class="nav-link" href="/logout"><b>&#128075LOGOUT</b></a>
             </li>
 
             {% else %}
@@ -74,17 +79,11 @@
           </ul>
         </div>
       </nav>
-      <!--Background music!!! - need to add javascript component so that it works with settings-->
-      <!--Music from https://www.youtube.com/watch?v=JcM7VFx-Q2E-->
-      <!--Converted to mp3 on https://ytmp3.nu/-->
-      <audio controls autoplay loop hidden>
-        <source src="background.mp3" type="audio/mpeg">
-      </audio>
       <main class="container-fluid py-5 text-center">
             {% block main %}{% endblock %}
       </main>
       {% if session["user_id"] %}
-        <footer><center>&#169SkySoarer 2022 | Data provided by <a href="https://airlabs.co/" target="_blank" >AirLabs</a>, <a href="https://www.skyscanner.com/" target="_blank" >SkyScanner</a>, and <a href="https://developers.google.com/maps" target="_blank" >Google Maps</a></center></footer>
+        <footer>&#169SkySoarer 2022 | Data provided by <a href="https://airlabs.co/" target="_blank" >AirLabs</a>, <a href="https://www.skyscanner.com/" target="_blank" >SkyScanner</a>, and <a href="https://developers.google.com/maps" target="_blank" >Google Maps</a></center></footer>
       {% endif %}
     </body>
     <script>

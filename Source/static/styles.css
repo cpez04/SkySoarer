@@ -43,9 +43,8 @@ nav .navbar-brand
     margin-top: auto;
 }
 
-.welcometext /* changes color of Welcome, (name) text! */
+.welcometext /*  customizes Welcome, (name) text! */
 {
-    color:hsl(0, 0%, 0%);
     padding-top: 15px;
     padding-bottom: 5px;
     font-size: 50px;
@@ -165,8 +164,8 @@ nav .navbar-brand
     flex-direction: column; /* make main-axis vertical */
     justify-content: center; /* align items vertically, in this case */
     align-items: center; /* align items horizontally, in this case */
-    height: 300px; 
-    padding-top: 100px;
+    height: 100vh; 
+    align-items: center;
 }
   
 @keyframes fadeInAnimation {
@@ -192,16 +191,17 @@ nav .navbar-brand
 /*Light/dark mode: https://stackoverflow.com/questions/63577939/save-dark-mode-light-mode-to-localstoage*/
 
 body.dark {
+    color: white;
     background-color: #121212;
 }
 body.light {
+    color: black;
     background-color: white;
 }
 
 body {
     padding: 0;
-    min-height: 500vh;
-    margin-top: 50px;
+    min-height: 100vh;
     background: hsl(0, 0%, 100%);
     animation: body 1s linear;
     animation-play-state: paused;
@@ -231,10 +231,10 @@ body {
 {
     opacity: 0;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform-origin: 50%;
-    transform: translate3d(-50%, -50%);
+    left: 50vw;
+    top: 80vh;
+    transform-origin: 80vh;
+    transform: translate3d(-10vh, -10vh);
 }
 
 .arrow-first
@@ -290,13 +290,9 @@ ul {
     list-style-position: inside;
 }
 
-
-
-
-
-
-
-
+footer {
+    text-align: center;
+}
 
 
 
