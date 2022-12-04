@@ -3,8 +3,6 @@ import json
 import geocoder 
 import haversine as hs
 
-from haversine import Unit
-
 #gets list of nearby airports (we need to parse database to only get name and distance from user)
 params = {
   'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
@@ -17,27 +15,16 @@ api_response = api_result.json()["response"]
 latlng=geocoder.ip('me').latlng
 latitude = latlng[0]
 longitude = latlng[1]
-usertuple = (latitude,longitude)  
 
 keys2 = []
 values2 = []
 dict2 = {}
 
+count = 5
 for row in api_response:
-  planetuple = (row['lat'], row['lng'])
-  distance = hs.haversine(usertuple, planetuple, unit=Unit.MILES)
-  
-  if distance < 10:
-    try:
-      keys2.append(row['flight_iata'])
-    except:
-      keys2.append("None")
-      
-    values2.append(distance)
-
-numPlanesSky = len(keys2)
-for i in range(numPlanesSky):
-  dict2[keys2[i]] = values2[i]
+    if count == 0:
+        break
+    print(row['flight_iata'])
+    count=count-1
     
-  
   

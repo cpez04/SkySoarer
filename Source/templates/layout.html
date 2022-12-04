@@ -136,25 +136,26 @@
       <main class="container-fluid py-5 text-center">
             {% block main %}{% endblock %}
       </main>
-      {% if session["user_id"] %}
-        <footer>&#169SkySoarer 2022 | Data provided by <a href="https://airlabs.co/" target="_blank" >AirLabs</a>, <a href="https://www.skyscanner.com/" target="_blank" >SkyScanner</a>, and <a href="https://developers.google.com/maps" target="_blank" >Google Maps</a></center></footer>
-      {% endif %}
     </body>
     <script>
-    /*Dark mode from https://stackoverflow.com/questions/63577939/save-dark-mode-light-mode-to-localstoage*/
-    window.onload=function() {
-      if(localStorage.darkMode=="false") {
+      /*Dark mode from https://stackoverflow.com/questions/63577939/save-dark-mode-light-mode-to-localstoage*/
+      window.onload=function() {
+        if(localStorage.darkMode=="false") {
+          document.body.classList.toggle('dark');
+          document.getElementById("alert1").checked=true;
+        }
+        else {
+          document.body.classList.toggle('light');
+        }
+      };
+      document.getElementById("alert1").addEventListener('change', () => {
         document.body.classList.toggle('dark');
-        document.getElementById("alert1").checked=true;
-      }
-      else {
         document.body.classList.toggle('light');
-      }
-    };
-    document.getElementById("alert1").addEventListener('change', () => {
-      document.body.classList.toggle('dark');
-      document.body.classList.toggle('light');
-      localStorage.darkMode=(localStorage.darkMode=="true")?"false":"true";
-    });
+        localStorage.darkMode=(localStorage.darkMode=="true")?"false":"true";
+      });
     </script>
+    
+    {% if session["user_id"] %}
+      <footer>&#169SkySoarer 2022 | Data provided by <a href="https://airlabs.co/" target="_blank" >AirLabs</a>, <a href="https://www.skyscanner.com/" target="_blank" >SkyScanner</a>, and <a href="https://developers.google.com/maps" target="_blank" >Google Maps</a></center></footer>
+    {% endif %}
 </html>

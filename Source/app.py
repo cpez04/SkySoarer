@@ -110,9 +110,9 @@ def index():
                 try:
                     keys2.append(row['flight_iata'])
                 except:
-                    keys2.append("None")
+                    keys2.append("N/A")
                 
-                values2.append(distance)
+                values2.append(round(distance,2))
 
         numPlanesSky = len(keys2)
         for i in range(numPlanesSky):

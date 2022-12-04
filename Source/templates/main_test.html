@@ -34,7 +34,7 @@
                     </td>
                     <!--Image-->
                     <td>
-                        <img src="{{url_for('static', filename='groupphoto.png')}}" align="middle" />   
+                        <img class="main_img" src="{{url_for('static', filename='groupphoto.png')}}" align="middle" />   
                     </td>
                 </tr>
             </tbody>
@@ -47,14 +47,30 @@
                 <tr>
                     <!--Image-->
                     <td style="width: 50%">
-                        <img src="{{url_for('static', filename='IMG_0035.JPG')}}" align="middle" />   
+                        <img class="main_img" src="{{url_for('static', filename='IMG_0035.JPG')}}" align="middle" />   
                     </td>
                     <!--Text-->
                     <td>
                         <br>
                         <h1 class="welcometext medfont">Look above!</h1>
                         <p class="subtitle">There are {{numPlanesSky}} flights in the sky within 10 miles of you.</p>
-                        <p class="subtitle">[subtitle]</p>
+
+                        <table class ="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-start">Flight ID</th>
+                                    <th class="text-start">Distance (miles)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {% for key,value in dict2.items() %}
+                                    <tr>
+                                        <td>{{key}}</td>
+                                        <td>{{value}}</td>
+                                    </tr>
+                                    {% endfor %}
+                            </tbody>
+                        </table>
                     </td>
                 </tr>
             </tbody>
