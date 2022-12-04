@@ -289,8 +289,12 @@ def best():
 
         response = requests.request("GET", url, headers=headers, params=querystring)
 
+       
         #api_response = response.json()['itineraries']['buckets'][0]['items'][0]['legs'][0]['segments'][0]['operatingCarrier']['name']#gets name of operating airlines for 0th row
-        api_response = response.json()['itineraries']['buckets'][0]['items']
+        try:
+            api_response = response.json()['itineraries']['buckets'][0]['items']
+        except:
+            return apology("No flights could be found with given parameters", 400)
 
         keys = []
         values = []
