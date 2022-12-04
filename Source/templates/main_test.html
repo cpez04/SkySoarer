@@ -6,7 +6,13 @@
 {% endblock %}
 
 {% block main %}
-    <body>
+<!--Background music!!! - need to add javascript component so that it works with settings-->
+<!--Music from https://www.youtube.com/watch?v=pHYHyZS_Xzo-->
+<!--Converted to mp3 on https://snapsave.io/en5/youtube-mp3-->
+<audio controls autoplay loop hidden>
+    <source src="background.mp3" type="audio/mpeg">
+</audio>
+<body>
     <div class="container">
         <h1 class="welcometext">Welcome, {{name}}!</h1>
         <p class="subtitle">Let's get started. To find information on a flight, please enter the flight number/IATA code below:</p>
@@ -26,195 +32,24 @@
     <div id="maintable">   
         <section class="reveal">
                 <div class="container">
-                    <div class="row">
                         <div class="col-md-12">
                             <!--HEADING-->
                             <div class="price-heading clearfix">
-                                <h1>What we do</h1>
-                                <p>With SkySoarer, tracking flights cannot be more efficient.</p>
+                                <h2>We get it. Finding travel information can be a pain. But it doesn't have to be.</h2>
+                                <h2>With SkySoarer, retrieving flight information has never been easier.</h2>
+                                <br>
+                                <br>
+                                <br>
+                                <h2>SkySoarer's creators (pictured below) have carefully selected APIs to give YOU the best information possible</h2> 
+                                <img src="Source/Source/templates/groupphoto.jpg" alt="TheCreators">
                             </div>
                             <!--HEADING END-->
                         </div>
                     </div>
                 </div>
-                <div class="container">
-                    
-                    <!--BLOCK ROW START-->
-                    <div class="row">
-                        <div class="col-md-4">
-                        
-                            <!--PRICE CONTENT START-->
-                            <div class="generic_content clearfix">
-                                
-                                <!--HEAD PRICE DETAIL START-->
-                                <div class="generic_head_price clearfix">
-                                
-                                    <!--HEAD CONTENT START-->
-                                    <div class="generic_head_content clearfix">
-                                    
-                                        <!--HEAD START-->
-                                        <div class="head_bg"></div>
-                                        <div class="head">
-                                            <span>Airports</span>
-                                        </div>
-                                        <!--//HEAD END-->
-                                        
-                                    </div>
-                                    <!--//HEAD CONTENT END-->
-                                    
-                                    <!--Description-->
-                                    <div class="generic_price_tag clearfix">	
-                                        <span class="price">
-                                            Enter a radius value centered in your current location to see all airports near you.
-                                        </span>
-                                    </div>
-                                    <!--//PRICE END-->
-                                    
-                                </div>                            
-                                <!--//HEAD PRICE DETAIL END-->
-                                
-                                <!--FEATURE LIST START-->
-                                <div class="generic_feature_list">
-                                    <ul>
-                                        <li><span>2GB</span> Bandwidth</li>
-                                        <li><span>150GB</span> Storage</li>
-                                        <li><span>12</span> Accounts</li>
-                                        <li><span>7</span> Host Domain</li>
-                                        <li><span>24/7</span> Support</li>
-                                    </ul>
-                                </div>
-                                <!--//FEATURE LIST END-->
-                                
-                                <!--BUTTON START-->
-                                <div class="generic_price_btn clearfix">
-                                    <a class="" href="">Sign up</a>
-                                </div>
-                                <!--//BUTTON END-->
-                                
-                            </div>
-                            <!--//PRICE CONTENT END-->
-                                
-                        </div>
-                        
-                        <div class="col-md-4">
-                        
-                            <!--PRICE CONTENT START-->
-                            <div class="generic_content active clearfix">
-                                
-                                <!--HEAD PRICE DETAIL START-->
-                                <div class="generic_head_price clearfix">
-                                
-                                    <!--HEAD CONTENT START-->
-                                    <div class="generic_head_content clearfix">
-                                    
-                                        <!--HEAD START-->
-                                        <div class="head_bg"></div>
-                                        <div class="head">
-                                            <span>Tracker</span>
-                                        </div>
-                                        <!--//HEAD END-->
-                                        
-                                    </div>
-                                    <!--//HEAD CONTENT END-->
-                                    
-                                    <!--PRICE START-->
-                                    <div class="generic_price_tag clearfix">	
-                                        <span class="price">
-                                            <span class="sign">$</span>
-                                            <span class="currency">199</span>
-                                            <span class="cent">.99</span>
-                                            <span class="month">/MON</span>
-                                        </span>
-                                    </div>
-                                    <!--//PRICE END-->
-                                    
-                                </div>                            
-                                <!--//HEAD PRICE DETAIL END-->
-                                
-                                <!--FEATURE LIST START-->
-                                <div class="generic_feature_list">
-                                    <ul>
-                                        <li><span>2GB</span> Bandwidth</li>
-                                        <li><span>150GB</span> Storage</li>
-                                        <li><span>12</span> Accounts</li>
-                                        <li><span>7</span> Host Domain</li>
-                                        <li><span>24/7</span> Support</li>
-                                    </ul>
-                                </div>
-                                <!--//FEATURE LIST END-->
-                                
-                                <!--BUTTON START-->
-                                <div class="generic_price_btn clearfix">
-                                    <a class="" href="">Sign up</a>
-                                </div>
-                                <!--//BUTTON END-->
-                                
-                            </div>
-                            <!--//PRICE CONTENT END-->
-                                
-                        </div>
-                        <div class="col-md-4">
-                        
-                            <!--PRICE CONTENT START-->
-                            <div class="generic_content clearfix">
-                                
-                                <!--HEAD PRICE DETAIL START-->
-                                <div class="generic_head_price clearfix">
-                                
-                                    <!--HEAD CONTENT START-->
-                                    <div class="generic_head_content clearfix">
-                                    
-                                        <!--HEAD START-->
-                                        <div class="head_bg"></div>
-                                        <div class="head">
-                                            <span>Best flight</span>
-                                        </div>
-                                        <!--//HEAD END-->
-                                        
-                                    </div>
-                                    <!--//HEAD CONTENT END-->
-                                    
-                                    <!--PRICE START-->
-                                    <div class="generic_price_tag clearfix">	
-                                        <span class="price">
-                                            <span class="sign">$</span>
-                                            <span class="currency">299</span>
-                                            <span class="cent">.99</span>
-                                            <span class="month">/MON</span>
-                                        </span>
-                                    </div>
-                                    <!--//PRICE END-->
-                                    
-                                </div>                            
-                                <!--//HEAD PRICE DETAIL END-->
-                                
-                                <!--FEATURE LIST START-->
-                                <div class="generic_feature_list">
-                                    <ul>
-                                        <li><span>2GB</span> Bandwidth</li>
-                                        <li><span>150GB</span> Storage</li>
-                                        <li><span>12</span> Accounts</li>
-                                        <li><span>7</span> Host Domain</li>
-                                        <li><span>24/7</span> Support</li>
-                                    </ul>
-                                </div>
-                                <!--//FEATURE LIST END-->
-                                
-                                <!--BUTTON START-->
-                                <div class="generic_price_btn clearfix">
-                                    <a class="" href="">Sign up</a>
-                                </div>
-                                <!--//BUTTON END-->
-                                
-                            </div>
-                            <!--//PRICE CONTENT END-->
-                                
-                        </div>
-                    </div>	
-                    <!--//BLOCK ROW END-->
-                    
-                </div>
-            </section>             
+
+                
+        </section>             
 
     <div class="container reveal">
         <h1>X</h1>
