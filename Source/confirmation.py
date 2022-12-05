@@ -2,15 +2,16 @@ import os
 from email.message import EmailMessage
 import ssl
 import smtplib
+import random
+import emoji
 
 email_sender = 'skysoarercs50@gmail.com'
 email_password = 'crsqtopyamuwnwdm'
-email_receiver = 'christopherperez@college.harvard.edu'
+email_receiver = 'hleong@college.harvard.edu'
+code = random.randint(0,999999)
 
 subject = 'SkySoarer: Account Created'
-body = """
-Hey there! Just to let you know, someone has created an account for SkySoarer under your email address. See you in the sky! 
-"""
+body = "Email Verification code: "+ str(code) + "\nSincerely, SkySoarer " + emoji.emojize(':airplane:')
 
 em = EmailMessage()
 em['From'] = email_sender

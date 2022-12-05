@@ -4,6 +4,10 @@ import requests
 import json
 import geopy
 import haversine as hs
+import ssl
+import smtplib
+import random
+import emoji
 
 from flask import Flask, flash, redirect, render_template, request, session
 from cs50 import SQL
@@ -12,6 +16,7 @@ from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from geopy.geocoders import Nominatim
 from haversine import Unit
+from email.message import EmailMessage
 
 from helpers import apology, login_required
 
@@ -193,12 +198,59 @@ def register():
         elif (request.form.get("password") != request.form.get("confirmpassword")):
             return apology("passwords must match", 400)
         
-        db.execute("INSERT INTO userdata (name, hash, email) VALUES (?,?,?)", request.form.get("name"), generate_password_hash(
-                request.form.get("password"), method='pbkdf2:sha256', salt_length=8), request.form.get("email"))
+        session['name'] = request.form.get("name")
+        session['email'] = request.form.get("email")
+        session['hash'] = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
         
-        return render_template("login.html")
+        return redirect("/verification")
+        
+    
+@app.route("/verification", methods=["GET", "POST"])
+def verification():
+    correct = True
+    success = 0 
+
+    if request.method == "GET":
+        email_sender = 'skysoarercs50@gmail.com'
+        email_password = 'crsqtopyamuwnwdm'
+        email_receiver = session['email']
+        session['code'] = random.randint(0,999999)
+        
+        subject = 'SkySoarer: Account Created'
+        body = "Email Verification code: "+ str(session['code']) + "\nSincerely, SkySoarer " + emoji.emojize(':airplane:')
+
+        em = EmailMessage()
+        em['From'] = email_sender
+        em['To'] = email_receiver
+        em['Subject'] = subject
+        em.set_content(body)
+
+        context = ssl.create_default_context()
+
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+            smtp.login(email_sender, email_password)
+            smtp.sendmail(email_sender,email_receiver, em.as_string())
+
+        return render_template("verification.html", correct=correct)
+    
+    else:
+        
+        print(request.form.get("verificationcode"))
+        print(session['code'])
+        
+        while success == 0: 
+            if int(request.form.get("verificationcode")) == int(session['code']):
+                success = 1 
+            else:
+                return render_template("verification.html", correct=False)
+    
+        db.execute("INSERT INTO userdata (name, hash, email) VALUES (?,?,?)", session["name"], session["hash"], session["email"])
+        
+        return redirect("/login")
+        
 
 @app.route("/nearby", methods=["GET", "POST"])
+@login_required
 def nearby():
     """To get nearby flights"""
     latlng=geocoder.ip('me').latlng
@@ -215,9 +267,12 @@ def nearby():
         zipcode = address.get('postcode')
         return render_template("nearby.html", city=city, state=state, country=country, zipcode=zipcode)
     else:
+        if request.form.get("radius") == "":
+            return apology("please type in a number", 400)
+        
         radius = float(request.form.get("radius"))*1.609 #converts miles to km
         
-        if radius <= 0:
+        if (radius <= 0):
             return apology("must type positive number", 400)
         
         params = {
@@ -251,11 +306,13 @@ def nearby():
  
 
 @app.route("/settings")
+@login_required
 def settings():
     """Settings"""
     return render_template("settings.html")
 
 @app.route("/track", methods=["GET","POST"])
+@login_required
 def track():
     if request.method == "GET":
         return render_template("track.html")
@@ -280,6 +337,7 @@ def track():
         
 
 @app.route("/best", methods=["GET", "POST"])
+@login_required
 def best():
     """Search for best flights"""
     if request.method == "POST":

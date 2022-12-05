@@ -5,20 +5,12 @@
 {% endblock %}
 
 {% block main %}
-<section class="vh-100 bg-image">
-
-  <video autoplay muted loop id="myVideo">
-    <source src="/Source/Source/static/Bangkok - 29806.mp4" type="video/mp4">
-  </video>
-  <div class="content">TEST</div>
-
-
-
-  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          <div class="card" style="border-radius: 15px; width: 500px">
+<body class="vh-100 bg-image register_image">
+  <section class="mask d-flex align-items-center h-100 gradient-custom-3" style="padding: 3vw">
+    <div class="h-100">
+      <div class="row d-flex h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6 container">
+          <div class="card" style="border-radius: 15px; width: 40vw; height: 97vh;">
             <div class="card-body p-5">
               <form action="/register" method="post">
 
@@ -57,7 +49,7 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</body>
 
 {% endblock %}
