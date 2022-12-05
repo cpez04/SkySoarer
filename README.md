@@ -1,3 +1,39 @@
+Welcome to SkySoarer, a flight tracking website by Herman, Chris, and Ben. Please follow the steps below to navigate this project. There are lots of different files/features to investigate as we go.
+
+We have submitted the website as a zip file skysoarer.zip. Download the file and open the SkySoarer folder on VS code, then execute the following commands in your terminal.
+
+$ cd source
+$ export FLASK_APP=app.py
+$ export FLASK_ENV=development
+$ flask --app app.py --debug run
+
+This should give the development server on which you can view the website. Ideally, the terminal will output:
+ * Running on http://127.0.0.1:5000
+INFO: Press CTRL+C to quit
+
+If this is not that case, it may be that the terminal gives you the following error:
+ModuleNotFoundError: No module named 'haversine'
+
+This could refer to any preinstalled module that we used, e.g. haversine, emoji, flask etc. In this case execute the following for the required module:
+
+$ pip3 install haversine
+
+Then try running the server again, and once all the modules are installed, open it up on chrome.
+
+You will be prompted to register an account, please do so and then click the Log In tab on the top left of the screen to log in. At this stage you may wish to check you inbox to find a confirmation email from the team!
+
+Hopefully, you have now arrived at a homepage with the message "Welcome, (name)!"
+
+
+
+
+
+
+
+
+
+
+
 # SkySoarer
 
 AIRLABS API KEY: c6f24eaf-a7e1-412b-8fdc-f0ca0194c440 
@@ -34,9 +70,9 @@ Timeline:
 
 11/27 (Sun): simple prototype (webpages and buttons), login and logout functions sessions; CSS; Email/text security confirmation post-registration.
 
-11/30 (Wed): SQL; basic flight tracker; user customization
+11/30 (Wed): SQL; basic flight tracker; user customization.
 
-12/3 (Sat): Include a map; print pdf function
+12/3 (Sat): Include a map, confirmation email, final touches
 
 12/06 (Tue): PROJECT DEADLINE
   
