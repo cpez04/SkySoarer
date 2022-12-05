@@ -6,15 +6,10 @@
 {% endblock %}
 
 {% block main %}
-<!--Background music!!! - need to add javascript component so that it works with settings-->
-<!--Music from https://www.youtube.com/watch?v=pHYHyZS_Xzo-->
-<!--Converted to mp3 on https://snapsave.io/en5/youtube-mp3-->
-<audio controls autoplay loop hidden>
-    <source src="background.mp3" type="audio/mpeg">
-</audio>
+
 <body>
     <div class="container">
-        <h1 class="welcometext">Welcome, {{name}}!</h1>
+        <h1 class="welcometext largefont">Welcome, {{name}}!</h1>
         <p class="subtitle">Let's get started. To find information on a flight, please enter the flight number/IATA code below:</p>
 
         <form action="/" method="post">
@@ -24,36 +19,64 @@
             </div>
         </form>
         <p class="subtitle2">Looking for something else? Scroll for more.</p>
-        <div class="arrow arrow-first"></div>
-        <div class="arrow arrow-second"></div>
-    </div>
-
-    <!--Comparison table-->
-    <div id="maintable">   
-        <section class="reveal">
-                <div class="container">
-                        <div class="col-md-12">
-                            <!--HEADING-->
-                            <div class="price-heading clearfix">
-                                <h2>We get it. Finding travel information can be a pain. But it doesn't have to be.</h2>
-                                <h2>With SkySoarer, retrieving flight information has never been easier.</h2>
-                                <br>
-                                <br>
-                                <br>
-                                <h2>SkySoarer's creators (pictured below) have carefully selected APIs to give YOU the best information possible</h2> 
-                                <img src="Source/Source/templates/groupphoto.jpg" alt="TheCreators">
-                            </div>
-                            <!--HEADING END-->
-                        </div>
-                    </div>
-                </div>
-
-                
-        </section>             
+    </div>          
 
     <div class="container reveal">
-        <h1>X</h1>
-        <p>Tracking flights cannot be more efficient.</p>
+        <table style="width:80vw">
+            <tbody>
+                <tr>
+                    <!--Text-->
+                    <td style="width: 50%">
+                        <br>
+                        <h1 class="welcometext medfont">We get it. Finding travel information can be a pain. But it doesn't have to be.</h1>
+                        <p class="subtitle">With SkySoarer, retrieving flight information has never been easier.</p>
+                        <p class="subtitle">SkySoarer's creators have carefully selected APIs to give YOU the best information possible.</p>
+                    </td>
+                    <!--Image-->
+                    <td>
+                        <img class="main_img" src="{{url_for('static', filename='groupphoto.png')}}" align="middle" />   
+                    </td>
+                </tr>
+            </tbody>
+        </table>      
+    </div>
+
+    <div class="container reveal">
+        <table style="width:80vw">
+            <tbody>
+                <tr>
+                    <!--Image-->
+                    <td style="width: 45%">
+                        <img style="width: 75%" class="main_img" src="{{url_for('static', filename='IMG_0035.JPG')}}" align="middle" />   
+                    </td>
+                    <!--Text-->
+                    <td>
+                        <br>
+                        <h1 class="welcometext medfont">Look above!</h1>
+                        <p class="subtitle">There are {{numPlanesSky}} flights in the sky within 10 miles of you. Here are a few of those flights:</p>
+
+                        <table class ="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-start">Flight ID</th>
+                                    <th class="text-start">Distance (miles)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    {% for key,value in dict2.items() %}
+                                        {% if key != 'N/A' %}
+                                            <tr>
+                                                <td>{{key}}</td>
+                                                <td>{{value}}</td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>      
     </div>
 </body>
 {% endblock %}

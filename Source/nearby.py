@@ -24,5 +24,6 @@ for row in api_response:
 for i in range (length):
   dicts[keys[i]] = values[i]
   
+print(dict(list(dicts.items())[:13]))
 # print(len(api_response)) # prints # of nearby airports in given radius 
 

@@ -3,6 +3,11 @@ import geocoder
 import requests
 import json
 import geopy
+import haversine as hs
+import ssl
+import smtplib
+import random
+import emoji
 
 from flask import Flask, flash, redirect, render_template, request, session
 from cs50 import SQL
@@ -10,6 +15,8 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from geopy.geocoders import Nominatim
+from haversine import Unit
+from email.message import EmailMessage
 
 from helpers import apology, login_required
 
@@ -82,7 +89,46 @@ def index():
 
         return render_template("searched.html", flight_iata=flight_iata, dict=dict)
     
-    return render_template("main_test.html", name=name.split()[0])
+    else:
+        params = {
+        'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
+        }
+        method = 'flights'
+        api_base = 'http://airlabs.co/api/v9/'
+        api_result = requests.get(api_base+method, params)
+        api_response = api_result.json()["response"]
+
+        latlng=geocoder.ip('me').latlng
+        latitude = latlng[0]
+        longitude = latlng[1]
+        usertuple = (latitude,longitude)  
+
+        keys2 = []
+        values2 = []
+        dict2 = {}
+
+        for row in api_response:
+            planetuple = (row['lat'], row['lng'])
+            distance = hs.haversine(usertuple, planetuple, unit=Unit.MILES)
+            
+            if distance < 10:
+                try:
+                    keys2.append(row['flight_iata'])
+                except:
+                    keys2.append("N/A")
+                
+                values2.append(format(distance, ".2f"))
+
+        numPlanesSky = len(keys2)
+        count = 0
+        for i in range(numPlanesSky):
+            if count == 7:
+                break
+            dict2[keys2[i]] = values2[i]
+            count=count+1
+        
+        
+        return render_template("main_test.html", name=name.split()[0], numPlanesSky=numPlanesSky, dict2=dict2)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -152,12 +198,59 @@ def register():
         elif (request.form.get("password") != request.form.get("confirmpassword")):
             return apology("passwords must match", 400)
         
-        db.execute("INSERT INTO userdata (name, hash, email) VALUES (?,?,?)", request.form.get("name"), generate_password_hash(
-                request.form.get("password"), method='pbkdf2:sha256', salt_length=8), request.form.get("email"))
+        session['name'] = request.form.get("name")
+        session['email'] = request.form.get("email")
+        session['hash'] = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
         
-        return render_template("login.html")
+        return redirect("/verification")
+        
+    
+@app.route("/verification", methods=["GET", "POST"])
+def verification():
+    correct = True
+    success = 0 
+
+    if request.method == "GET":
+        email_sender = 'skysoarercs50@gmail.com'
+        email_password = 'crsqtopyamuwnwdm'
+        email_receiver = session['email']
+        session['code'] = random.randint(0,999999)
+        
+        subject = 'SkySoarer: Account Created'
+        body = "Email Verification code: "+ str(session['code']) + "\nSincerely, SkySoarer " + emoji.emojize(':airplane:')
+
+        em = EmailMessage()
+        em['From'] = email_sender
+        em['To'] = email_receiver
+        em['Subject'] = subject
+        em.set_content(body)
+
+        context = ssl.create_default_context()
+
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+            smtp.login(email_sender, email_password)
+            smtp.sendmail(email_sender,email_receiver, em.as_string())
+
+        return render_template("verification.html", correct=correct)
+    
+    else:
+        
+        print(request.form.get("verificationcode"))
+        print(session['code'])
+        
+        while success == 0: 
+            if int(request.form.get("verificationcode")) == int(session['code']):
+                success = 1 
+            else:
+                return render_template("verification.html", correct=False)
+    
+        db.execute("INSERT INTO userdata (name, hash, email) VALUES (?,?,?)", session["name"], session["hash"], session["email"])
+        
+        return redirect("/login")
+        
 
 @app.route("/nearby", methods=["GET", "POST"])
+@login_required
 def nearby():
     """To get nearby flights"""
     latlng=geocoder.ip('me').latlng
@@ -174,9 +267,12 @@ def nearby():
         zipcode = address.get('postcode')
         return render_template("nearby.html", city=city, state=state, country=country, zipcode=zipcode)
     else:
-        radius = float(request.form.get("radius"))
+        if request.form.get("radius") == "":
+            return apology("please type in a number", 400)
         
-        if radius <= 0:
+        radius = float(request.form.get("radius"))*1.609 #converts miles to km
+        
+        if (radius <= 0):
             return apology("must type positive number", 400)
         
         params = {
@@ -201,7 +297,7 @@ def nearby():
 
         for row in api_response:
             keys.append(row['name'])
-            values.append(row['distance'])
+            values.append(round(row['distance']/1.609,2))
       
         for i in range(length):
             dicts[keys[i]] = values[i]
@@ -210,11 +306,13 @@ def nearby():
  
 
 @app.route("/settings")
+@login_required
 def settings():
     """Settings"""
     return render_template("settings.html")
 
 @app.route("/track", methods=["GET","POST"])
+@login_required
 def track():
     if request.method == "GET":
         return render_template("track.html")
@@ -239,6 +337,7 @@ def track():
         
 
 @app.route("/best", methods=["GET", "POST"])
+@login_required
 def best():
     """Search for best flights"""
     if request.method == "POST":
@@ -253,8 +352,12 @@ def best():
 
         response = requests.request("GET", url, headers=headers, params=querystring)
 
+       
         #api_response = response.json()['itineraries']['buckets'][0]['items'][0]['legs'][0]['segments'][0]['operatingCarrier']['name']#gets name of operating airlines for 0th row
-        api_response = response.json()['itineraries']['buckets'][0]['items']
+        try:
+            api_response = response.json()['itineraries']['buckets'][0]['items']
+        except:
+            return apology("No flights could be found with given parameters", 400)
 
         keys = []
         values = []
