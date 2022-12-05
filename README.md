@@ -40,17 +40,20 @@ You may notice in the footer that for this project we retrieved data from AirLab
 AIRLABS API KEY: c6f24eaf-a7e1-412b-8fdc-f0ca0194c440 
 GOOGLE MAPS API KEY: AIzaSyAg3dpTGiCwOvr5QrS0CIuyrET6-lB4fVo
 
-For the airlabs API it is worth noting that we only get 1000 queries on the free plan, so if at any stage you run into a problem with something flight-tracking related, contact us and we will activate another free plan.
+For the airlabs API it is worth noting that we only get 1000 queries on the free plan, so if at any stage you run into a problem with something flight-tracking related on the website, contact us and we will activate another free plan.
 
-While on the homepage, execute
+Now use the website as you wish. For all the tracking functions, ideally users would know the flight number/IATA code, as this is accessible almost everywhere (boarding passes, phone apps etc.) and they are probably primarily interested in tracking the flights of relatives who have told them their flight number.
 
+Alternatively, you can go to https://www.flightradar24.com/, click on a random flight, get the flight number, and this should be trackable on our website too! That is, of course, with the exception of cargo and private planes etc. that may not be on the database. 
 
+Other functions don't require flight numbers, check out nearby aiports and enter "60" to get all the airports within 60km of your current location. Check out best flights and see what the cheapest flight from "BOS" to "JFK" would be tomorrow!
 
+At some point take a visit to settings to notice we have a dark mode option that allows for a bit of user customization. Turn it on and keep exploring.
 
-
-
-
-
+Any questions please email:
+christopherperez@college.harvard.edu
+hleong@college.harvard.edu
+bscott@college.harvard.edu
 
 # SkySoarer
 
