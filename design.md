@@ -9,12 +9,12 @@ prices.py
 
 skysoarer.db
 
+layout.html
 apology.html
 best.html
 bested.html
 cube.html
 graph-main.html
-layout.html
 login.html
 main_test.html
 main.html

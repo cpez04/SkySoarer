@@ -1,6 +1,6 @@
 Welcome to SkySoarer, a flight tracking website by Herman, Chris, and Ben. Please follow the steps below to navigate this project. There are lots of different files/features to investigate as we go.
 
-We have submitted the website as a zip file skysoarer.zip. Before downloading the file, check you have Python 3.11 installed on your computer. Open this folder and double click on the Install certificates.command file to ensure you will be able to operate the website. 
+We have submitted the website as a zip file skysoarer.zip. Before downloading the file, check you have Python 3.11 installed on your computer. Open this folder and double click on the Install certificates.command file to ensure you have the necessary certificates installed and updated so you can operate the website. 
 
 Now, download skysoarer.zip and open the SkySoarer folder on VS code. Once this is done, execute the following commands in your terminal.
 
