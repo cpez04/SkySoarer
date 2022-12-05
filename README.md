@@ -46,7 +46,7 @@ Now use the website as you wish. For all the tracking functions, ideally users w
 
 Alternatively, you can go to https://www.flightradar24.com/, click on a random flight, get the flight number, and this should be trackable on our website too! That is, of course, with the exception of cargo and private planes etc. that may not be on the database. 
 
-Other functions don't require flight numbers, check out nearby aiports and enter "60" to get all the airports within 60km of your current location. Check out best flights and see what the cheapest flight from "BOS" to "JFK" would be tomorrow!
+Other functions don't require flight numbers, check out nearby aiports and enter "60" to get all the airports within 60 miles of your current location. Check out best flights and see what the cheapest flight from "BOS" to "LHR" would be tomorrow!
 
 At some point take a visit to settings to notice we have a dark mode option that allows for a bit of user customization. Turn it on and keep exploring.
 
