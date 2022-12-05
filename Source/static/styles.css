@@ -257,3 +257,33 @@ footer {
     width: 40vw;
     border-radius: 50%;
 }
+
+.nearby_title
+{
+    padding: 30vh;
+}
+
+.register_image
+{
+    background-image: url('https://c4.wallpaperflare.com/wallpaper/951/792/846/aviation-aircraft-flight-sunrise-clouds-sky-white-airplane-wallpaper-preview.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+  }
+
+.content {
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+  }

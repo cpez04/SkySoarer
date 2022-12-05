@@ -112,12 +112,17 @@ def index():
                 except:
                     keys2.append("N/A")
                 
-                values2.append(round(distance,2))
+                values2.append(format(distance, ".2f"))
 
         numPlanesSky = len(keys2)
+        count = 0
         for i in range(numPlanesSky):
+            if count == 7:
+                break
             dict2[keys2[i]] = values2[i]
-    
+            count=count+1
+        
+        
         return render_template("main_test.html", name=name.split()[0], numPlanesSky=numPlanesSky, dict2=dict2)
 
 
@@ -210,7 +215,7 @@ def nearby():
         zipcode = address.get('postcode')
         return render_template("nearby.html", city=city, state=state, country=country, zipcode=zipcode)
     else:
-        radius = float(request.form.get("radius"))
+        radius = float(request.form.get("radius"))*1.609 #converts miles to km
         
         if radius <= 0:
             return apology("must type positive number", 400)
@@ -237,7 +242,7 @@ def nearby():
 
         for row in api_response:
             keys.append(row['name'])
-            values.append(row['distance'])
+            values.append(round(row['distance']/1.609,2))
       
         for i in range(length):
             dicts[keys[i]] = values[i]
