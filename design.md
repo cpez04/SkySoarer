@@ -1,29 +1,5 @@
-app.py
-confirmation.py
-delays.py
-flight-info.py
-flightdistance.py
-helpers.py
-nearby.py
-prices.py
+## 1 - How We Implemented Our Project:
 
-skysoarer.db
 
-layout.html
-apology.html
-best.html
-bested.html
-cube.html
-graph-main.html
-login.html
-main_test.html
-main.html
-map.html
-nearby.html
-nearbyed.html
-register.html
-searches.html
-settings.html
-track.html
-tracked.html
-verification.html
+
+## 2 - Why We Made the Design Choices We Did
