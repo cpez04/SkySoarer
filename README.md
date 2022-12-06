@@ -5,6 +5,7 @@ We have submitted the website as a zip file skysoarer.zip. Before downloading th
 Now, download skysoarer.zip and open the SkySoarer folder on VS code. Once this is done, execute the following commands in your terminal.
 
 $ cd source
+$ cd source 
 $ ls
 
 Check that the following files are present:
