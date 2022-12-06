@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Login
+    Forgot Password
 {% endblock %}
 
 {% block main %}
@@ -10,30 +10,20 @@
     <div class="h-100">
       <div class="row d-flex h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6 container">
-          <div class="card" style="border-radius: 15px; width: 40vw; height: 60vh;">
+          <div class="card" style="border-radius: 15px; width: 40vw; height: 35vh;">
             <div class="card-body p-5">
-              <form action="/login" method="post">
+              <form action="/forgotpassword" method="post">
 
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form3Example3cg"><b>Your Email</b></label>
                   <input type="email" name="email" id="email" class="form-control form-control-lg" placeholder="Email" />
                 </div>
 
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="form3Example4cg"><b>Password</b></label>
-                  <input type="password" name="password" id="password" class="form-control form-control-lg" placeholder="Password" />
-                </div>
-
                 <div class="d-flex justify-content-center">
                   <button type="submit"
-                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
+                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Send Code</button>
                 </div>
-
-                <p class="text-center text-muted mt-5 mb-0">Forgot Password? <a href="/forgotpassword"
-                  class="fw-bold text-body"><u>Click Here</u></a></p>
-  
-              </form>
-             
+                </form>
 
             </div>
           </div>

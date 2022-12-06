@@ -174,8 +174,8 @@ def logout():
     # Forget any user_id
     session.clear()
 
-    # Redirect user to login form
-    return redirect("/login")
+    # Redirect user to logout page
+    return render_template("logout.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -234,9 +234,6 @@ def verification():
         return render_template("verification.html", correct=correct)
     
     else:
-        
-        print(request.form.get("verificationcode"))
-        print(session['code'])
         
         while success == 0: 
             if int(request.form.get("verificationcode")) == int(session['code']):
@@ -388,3 +385,75 @@ def best():
 
         return render_template("bested.html", dict=dict, adults=request.form.get("numAdults"))
     return render_template("best.html")
+
+@app.route("/forgotpassword", methods=["GET","POST"])
+def forgotpassword():
+    if request.method =="GET":
+        return render_template("forgotpass.html")
+    else:
+        if len(db.execute("SELECT email FROM userdata WHERE email = ? LIMIT 1", request.form.get("email"))) == 0:
+            return apology("you have not created an account with that username", 400)
+        
+        session['email'] = request.form.get("email")
+        
+        return redirect("/passverification")
+    
+@app.route("/passverification", methods=["GET","POST"])
+def passverification():
+    correctPass = True
+    successPass = 0 
+    
+    if request.method =="GET":
+        email_sender = 'skysoarercs50@gmail.com'
+        email_password = 'crsqtopyamuwnwdm'
+        email_receiver = session['email']
+        session['code'] = random.randint(0,999999)
+        
+        subject = 'SkySoarer: Password Change Confirmation'
+        body = "Password change confirmation code: "+ str(session['code']) + "\nSincerely, SkySoarer " + emoji.emojize(':airplane:')
+
+        em = EmailMessage()
+        em['From'] = email_sender
+        em['To'] = email_receiver
+        em['Subject'] = subject
+        em.set_content(body)
+
+        context = ssl.create_default_context()
+
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+            smtp.login(email_sender, email_password)
+            smtp.sendmail(email_sender,email_receiver, em.as_string())
+
+        return render_template("passverification.html", correct=correctPass)
+    
+    else:
+        while successPass == 0: 
+            if request.form.get("verificationcode") is None:
+                return apology("must provide code", 400)
+            if int(request.form.get("verificationcode")) == int(session['code']):
+                successPass = 1 
+            else:
+                return render_template("passverification.html", correct=False)
+    
+        #db.execute("INSERT INTO userdata (name, hash, email) VALUES (?,?,?)", session["name"], session["hash"], session["email"])
+        
+        return redirect("/changepass")
+    
+@app.route("/changepass", methods=["GET","POST"])
+def changepass():
+    if request.method == "GET":
+        return render_template("changepass.html")
+    else:
+        if not request.form.get("password"):
+            return apology("must provide password", 400)
+        elif len(request.form.get("password")) < 6:
+            return apology("password must be > 6 characters")
+        elif not request.form.get("confirmpassword"):
+            return apology("must provide confirmation", 400)
+        elif (request.form.get("password") != request.form.get("confirmpassword")):
+            return apology("passwords must match", 400)
+        
+        db.execute("UPDATE userdata SET hash = ? WHERE email = ?", generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8), session['email'])
+        
+        return redirect("/login")
+

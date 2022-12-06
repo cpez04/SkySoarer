@@ -258,9 +258,10 @@ footer {
     border-radius: 50%;
 }
 
-.nearby_title
+.page_title
 {
-    padding: 30vh;
+    padding-top: 15vh;
+    padding-bottom: 5vh;
 }
 
 .register_image
