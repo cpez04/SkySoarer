@@ -32,7 +32,7 @@ Session(app)
 # Configure CS50 Library to use database
 db = SQL("sqlite:///skysoarer.db")
 
-db.execute("CREATE TABLE IF NOT EXISTS userdata (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL, hash TEXT NOT NULL, email TEXT NOT NULL)")
+db.execute("CREATE TABLE IF NOT EXISTS userdata (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL, hash TEXT NOT NULL, email TEXT NOT NULL)") #userdata table is what we will use to store registered users' info
 
 @app.after_request
 def after_request(response):
@@ -49,9 +49,8 @@ def index():
     name = db.execute("SELECT name FROM userdata WHERE id = ?", session["user_id"])[0]['name']
 
     if request.method == "POST":
-        flight_iata = request.form.get("flight_iata")
+        flight_iata = request.form.get("flight_iata") # used to get flight information based on specific flight IATA number
         
-        # when user determines a specific flight, returns an info report (maybe here allows save as pdf)
         params = {
         'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
         'flight_iata': flight_iata,
@@ -60,18 +59,18 @@ def index():
         try:
             method = 'flight'
             api_base = 'http://airlabs.co/api/v9/'
-            api_result = requests.get(api_base+method, params)
+            api_result = requests.get(api_base+method, params) # queries Airlabs database
             api_response = api_result.json()['response']
         except:
-            return apology("No match", 400)
+            return apology("No match", 400) # returns apology if no match found
 
         # keys store the info we want to show to users
         key = ['dep_name', 'arr_name', 'status', 'dep_time', 'dep_gate', 'arr_gate', 'model'] 
         value = []
         dict = {}
 
-        # retrieve values for each key
-        for items in key:
+        # retrieve values for each key and appends it to values
+        for items in key: 
             try:
                 value.append(api_response[items])
             except:
@@ -79,7 +78,7 @@ def index():
             
         key = ['Departure Airport', 'Arrival Airport', 'Flight Status', 'Departure Time', 'Departure Gate', 'Arrival Gate', 'Airplane Model']
 
-        # pair key-value
+        # pair key-value and puts data into the dictionary
         for i in range(len(key)):
             dict[key[i]] = value[i]
             if dict[key[i]] is None:
@@ -87,9 +86,10 @@ def index():
             else:
                 dict[key[i]] = dict[key[i]].title()
 
-        return render_template("searched.html", flight_iata=flight_iata, dict=dict)
+        return render_template("searched.html", flight_iata=flight_iata, dict=dict) 
     
     else:
+        # used to create the nearby flights at botton of homepage
         params = {
         'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
         }
@@ -98,31 +98,31 @@ def index():
         api_result = requests.get(api_base+method, params)
         api_response = api_result.json()["response"]
 
-        latlng=geocoder.ip('me').latlng
+        latlng=geocoder.ip('me').latlng # retrieves user's latitude and longitude
         latitude = latlng[0]
         longitude = latlng[1]
-        usertuple = (latitude,longitude)  
+        usertuple = (latitude,longitude) #formats it into a tuple 
 
         keys2 = []
         values2 = []
         dict2 = {}
 
-        for row in api_response:
+        for row in api_response: # goes through each row in API response to see if the distance from user to plane is < 10 miles
             planetuple = (row['lat'], row['lng'])
             distance = hs.haversine(usertuple, planetuple, unit=Unit.MILES)
             
-            if distance < 10:
+            if distance < 10: #appends keys based on flights that are <10 miles frm user
                 try:
                     keys2.append(row['flight_iata'])
                 except:
-                    keys2.append("N/A")
+                    keys2.append("N/A") # makes flight id read N/A if we cannot retrieve flight ID 
                 
-                values2.append(format(distance, ".2f"))
+                values2.append(format(distance, ".2f")) # also adds distance from user 
 
         numPlanesSky = len(keys2)
         count = 0
         for i in range(numPlanesSky):
-            if count == 7:
+            if count == 7: # limits the number of rows in table to 7 flights
                 break
             dict2[keys2[i]] = values2[i]
             count=count+1
@@ -183,7 +183,7 @@ def register():
     if request.method == "GET":
         return render_template("register.html")
     else:
-        if not request.form.get("name"):
+        if not request.form.get("name"): # goes through the following checks to see if user inputted registration info is valid
             return apology("must provide name", 400)
         elif not request.form.get("email"):
             return apology("must provide email", 400)
@@ -198,11 +198,11 @@ def register():
         elif (request.form.get("password") != request.form.get("confirmpassword")):
             return apology("passwords must match", 400)
         
-        session['name'] = request.form.get("name")
+        session['name'] = request.form.get("name") # initializes these global variables to acceess them in the email confirmation stage of project
         session['email'] = request.form.get("email")
         session['hash'] = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
         
-        return redirect("/verification")
+        return redirect("/verification") # redirects to email verification 
         
     
 @app.route("/verification", methods=["GET", "POST"])
@@ -211,10 +211,10 @@ def verification():
     success = 0 
 
     if request.method == "GET":
-        email_sender = 'skysoarercs50@gmail.com'
+        email_sender = 'skysoarercs50@gmail.com' # sends email to user
         email_password = 'crsqtopyamuwnwdm'
         email_receiver = session['email']
-        session['code'] = random.randint(0,999999)
+        session['code'] = random.randint(0,999999) # random code that user must type in, inserted into email 
         
         subject = 'SkySoarer: Account Created'
         body = "Email Verification code: "+ str(session['code']) + "\nSincerely, SkySoarer " + emoji.emojize(':airplane:')
@@ -234,14 +234,13 @@ def verification():
         return render_template("verification.html", correct=correct)
     
     else:
-        
-        while success == 0: 
+        while success == 0: # tells user to repeat verification code if they type it in incorrectly 
             if int(request.form.get("verificationcode")) == int(session['code']):
                 success = 1 
             else:
                 return render_template("verification.html", correct=False)
     
-        db.execute("INSERT INTO userdata (name, hash, email) VALUES (?,?,?)", session["name"], session["hash"], session["email"])
+        db.execute("INSERT INTO userdata (name, hash, email) VALUES (?,?,?)", session["name"], session["hash"], session["email"]) # completes registration when code typed in correctly 
         
         return redirect("/login")
         
@@ -250,13 +249,13 @@ def verification():
 @login_required
 def nearby():
     """To get nearby flights"""
-    latlng=geocoder.ip('me').latlng
+    latlng=geocoder.ip('me').latlng # gets user's latitude and longitude
     latitude = latlng[0]
     longitude = latlng[1]
         
     if request.method == "GET":
-        geolocator = Nominatim(user_agent="geoapiExercises")
-        location = geolocator.reverse(str(latitude)+","+str(longitude))
+        geolocator = Nominatim(user_agent="geoapiExercises") # gets info about user's current address, such as city state country zip code 
+        location = geolocator.reverse(str(latitude)+","+str(longitude)) 
         address = location.raw['address']
         city = address.get('city', '')
         state = address.get('state', '')
@@ -281,7 +280,7 @@ def nearby():
         method = 'nearby'
         api_base = 'http://airlabs.co/api/v9/'
         api_result = requests.get(api_base+method, params)
-        api_response = api_result.json()["response"]["airports"] #prints informaiton for airports nearby
+        api_response = api_result.json()["response"]["airports"] #prints information for airports nearby
         
         keys = []
         values = []
@@ -289,15 +288,15 @@ def nearby():
         arethereairports = True
         length = len(api_response)
         
-        if length == 0:
+        if length == 0: # checks to see if there are nearby airports
             arethereairports = False
 
         for row in api_response:
             keys.append(row['name'])
-            values.append(round(row['distance']/1.609,2))
+            values.append(round(row['distance']/1.609,2)) 
       
-        for i in range(length):
-            dicts[keys[i]] = values[i]
+        for i in range(length): # creates dictionary where keys are airport name and value is distance converted to miles
+            dicts[keys[i]] = values[i] 
            
         return render_template("nearbyed.html", dicts=dicts, arethereairports=arethereairports)
  
@@ -314,23 +313,26 @@ def track():
     if request.method == "GET":
         return render_template("track.html")
     else:
+
+        # obtain flight_iata from user input
         flight_iata = request.form.get("flight_iata")
         params = {
         'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
         'flight_iata': flight_iata,
         }
 
+        # pull out query result, return apology if an error arises
         try:
             method = 'flight'
             api_base = 'http://airlabs.co/api/v9/'
             api_result = requests.get(api_base+method, params)
             api_response = api_result.json()['response']
-            latitude = api_response['lat']
+            latitude = api_response['lat'] # gets flight's latitude and longitude
             longitude = api_response['lng']
         except:
             return apology("No match", 400)
 
-        return render_template("tracked.html", flight_iata=flight_iata, latitude=latitude, longitude=longitude)
+        return render_template("tracked.html", flight_iata=flight_iata, latitude=latitude, longitude=longitude) # returns it to the google map so it can plot flight's location
         
 
 @app.route("/best", methods=["GET", "POST"])
@@ -343,14 +345,13 @@ def best():
         querystring = {"adults":"1","origin":request.form.get("origin"),"destination":request.form.get("destination"),"departureDate":request.form.get("departureDate"),"currency":"USD"}
 
         headers = {
-            "X-RapidAPI-Key": "49e1e79da8msh462c078111aa514p12ee18jsn10c23c73dcc6",
+            "X-RapidAPI-Key": "39e7ee0cffmshab84a47f7153aecp176fc4jsn58bb35099011",
             "X-RapidAPI-Host": "skyscanner44.p.rapidapi.com"
         }
 
         response = requests.request("GET", url, headers=headers, params=querystring)
 
-       
-        #api_response = response.json()['itineraries']['buckets'][0]['items'][0]['legs'][0]['segments'][0]['operatingCarrier']['name']#gets name of operating airlines for 0th row
+        #gets name of operating airlines for 0th row
         try:
             api_response = response.json()['itineraries']['buckets'][0]['items']
         except:
@@ -403,6 +404,7 @@ def passverification():
     correctPass = True
     successPass = 0 
     
+    # use email server to send a random code
     if request.method =="GET":
         email_sender = 'skysoarercs50@gmail.com'
         email_password = 'crsqtopyamuwnwdm'
@@ -434,9 +436,7 @@ def passverification():
                 successPass = 1 
             else:
                 return render_template("passverification.html", correct=False)
-    
-        #db.execute("INSERT INTO userdata (name, hash, email) VALUES (?,?,?)", session["name"], session["hash"], session["email"])
-        
+
         return redirect("/changepass")
     
 @app.route("/changepass", methods=["GET","POST"])
@@ -446,6 +446,8 @@ def changepass():
     else:
         if not request.form.get("password"):
             return apology("must provide password", 400)
+
+        # Password must be >= 6 characters
         elif len(request.form.get("password")) < 6:
             return apology("password must be > 6 characters")
         elif not request.form.get("confirmpassword"):
@@ -456,4 +458,3 @@ def changepass():
         db.execute("UPDATE userdata SET hash = ? WHERE email = ?", generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8), session['email'])
         
         return redirect("/login")
-
