@@ -43,9 +43,9 @@ Then try running the server again, and once all the modules are installed, open 
 
 You may notice in the footer that for this project we retrieved data from AirLabs, SkyScanner, and Google Maps. We used the following API Key's that you don't have to worry about exporting. These API keys are already inputted into app.py, so there is no work on your end required to retrieve this data! 
 
-AIRLABS API KEY: c6f24eaf-a7e1-412b-8fdc-f0ca0194c440 
-SKYSCANNER API KEY: 39e7ee0cffmshab84a47f7153aecp176fc4jsn58bb35099011
-GOOGLE MAPS API KEY: AIzaSyAg3dpTGiCwOvr5QrS0CIuyrET6-lB4fVo
+AIRLABS API KEY: (removed)
+SKYSCANNER API KEY: (removed)
+GOOGLE MAPS API KEY: (removed)
 
 For the AirLabs API, it is worth noting that we only get 1000 queries on the free plan, and for Skyscanner we only get 100. So, if at any stage you run into a problem with something flight-tracking related on the website, contact us and we will activate another free plan. Though prior to submitting we will ensure there are ample queries remaining.
 

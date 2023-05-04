@@ -52,7 +52,7 @@ def index():
         flight_iata = request.form.get("flight_iata") # used to get flight information based on specific flight IATA number
         
         params = {
-        'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
+        'api_key': 'removed',
         'flight_iata': flight_iata,
         }
 
@@ -91,7 +91,7 @@ def index():
     else:
         # used to create the nearby flights at botton of homepage
         params = {
-        'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
+        'api_key': 'removed',
         }
         method = 'flights'
         api_base = 'http://airlabs.co/api/v9/'
@@ -212,7 +212,7 @@ def verification():
 
     if request.method == "GET":
         email_sender = 'skysoarercs50@gmail.com' # sends email to user
-        email_password = 'crsqtopyamuwnwdm'
+        email_password = 'removed'
         email_receiver = session['email']
         session['code'] = random.randint(0,999999) # random code that user must type in, inserted into email 
         
@@ -272,7 +272,7 @@ def nearby():
             return apology("must type positive number", 400)
         
         params = {
-        'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
+        'api_key': 'removed',
         'lat': latitude,
         'lng': longitude,
         'distance': radius
@@ -317,7 +317,7 @@ def track():
         # obtain flight_iata from user input
         flight_iata = request.form.get("flight_iata")
         params = {
-        'api_key': 'c6f24eaf-a7e1-412b-8fdc-f0ca0194c440',
+        'api_key': 'removed',
         'flight_iata': flight_iata,
         }
 
@@ -345,7 +345,7 @@ def best():
         querystring = {"adults":"1","origin":request.form.get("origin"),"destination":request.form.get("destination"),"departureDate":request.form.get("departureDate"),"currency":"USD"}
 
         headers = {
-            "X-RapidAPI-Key": "39e7ee0cffmshab84a47f7153aecp176fc4jsn58bb35099011",
+            "X-RapidAPI-Key": "removed",
             "X-RapidAPI-Host": "skyscanner44.p.rapidapi.com"
         }
 
@@ -407,7 +407,7 @@ def passverification():
     # use email server to send a random code
     if request.method =="GET":
         email_sender = 'skysoarercs50@gmail.com'
-        email_password = 'crsqtopyamuwnwdm'
+        email_password = 'removed'
         email_receiver = session['email']
         session['code'] = random.randint(0,999999)
         
